@@ -5,4 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>DANSALKAMU</title>
 </head>
+<body>
+<h1>Test Project</h1>
+</body>
 </html>
