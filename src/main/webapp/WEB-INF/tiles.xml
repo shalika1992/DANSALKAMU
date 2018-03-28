@@ -30,5 +30,15 @@
 		<put-attribute name="title" value="IBS|Login" />
 		<put-attribute name="body" value="/WEB-INF/pages/login/login.jsp" />
 	</definition>
+	
+		<definition name="dansalaPage" extends="baseTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/dansala/dansala.jsp" />
+	</definition>
+	
+			<definition name="map" extends="baseTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/dansala/map.jsp" />
+	</definition>
 
 </tiles-definitions>
