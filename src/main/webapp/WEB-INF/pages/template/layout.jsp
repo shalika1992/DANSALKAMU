@@ -10,11 +10,20 @@
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-		<div><tiles:insertAttribute name="header" /></div>
-		<div style="float:left;padding:10px;width:15%;"><tiles:insertAttribute name="menu" /></div>
-		<div style="float:left;padding:10px;width:80%;border-left:1px solid pink;">
-		<tiles:insertAttribute name="body" /></div>
-    	<div style="clear:both"><tiles:insertAttribute name="footer" /></div>
+		<div class="w3-row ">
+			<div class="w3-col s1 m12">
+				<div ><tiles:insertAttribute name="menu" /></div>
+			</div>
+  			<div class="w3-col s11 m12 ">
+  				<div><tiles:insertAttribute name="header" /></div>
+  				<div><tiles:insertAttribute name="body" /></div>
+  				<div style="clear:both"><tiles:insertAttribute name="footer" /></div>
+  			</div>
+		</div>
+		
+		
+	
+    
 
 </body>
 </html>
