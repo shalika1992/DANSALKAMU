@@ -15,10 +15,11 @@
     <i class="fa fa-eye w3-xxlarge"></i>
     <p>PHOTOS</p>
   </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-envelope w3-xxlarge"></i>
-    <p>CONTACT</p>
+  <a href="loadLogin.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-sign-out w3-xxlarge"></i>
+    <p>LOGOUT</p>
   </a>
+ 
 </nav>
 
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
@@ -27,6 +28,7 @@
     <a href="homePage.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
     <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+    <a href="loadLogin.html" class="w3-bar-item w3-button" style="width:25% !important">LOGOUT</a>
+     
   </div>
 </div>

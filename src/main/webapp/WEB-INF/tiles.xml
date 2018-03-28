@@ -31,14 +31,19 @@
 		<put-attribute name="body" value="/WEB-INF/pages/login/login.jsp" />
 	</definition>
 	
-		<definition name="dansalaPage" extends="baseTemplate">
+	<definition name="dansalaPage" extends="baseTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/dansala/dansala.jsp" />
 	</definition>
 	
-			<definition name="map" extends="baseTemplate">
+	<definition name="map" extends="baseTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/dansala/map.jsp" />
+	</definition>
+	
+		<definition name="register" extends="baseTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/register/register.jsp" />
 	</definition>
 
 </tiles-definitions>

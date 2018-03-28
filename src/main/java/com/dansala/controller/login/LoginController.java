@@ -21,10 +21,15 @@ public class LoginController {
 		return new ModelAndView("login", "command", new LoginBean());
 	}
 	
-@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute("LoginBean")LoginBean LoginBean,ModelMap modelMap){		
 		return "home";
 	}
+
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public ModelAndView loadRegisterPage(){		
+		return new ModelAndView("register");
+}
 
 
 

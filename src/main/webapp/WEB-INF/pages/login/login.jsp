@@ -40,62 +40,12 @@
                     <a href="#" onclick="showRegistrationForm()">Register</a>
                 </div>
                 </div>
-                <div id="id01" class="w3-modal w3-transparent">
-
-                    <div class="w3-modal-content w3-animate-top w3-card-4 w3-transparent">
-                        <header class="w3-container">
-                            <span onclick="hideRegistrationForm()" class="w3-button w3-display-topright">&times;</span>
-
-                            <div class="w3-row">
-                                <div>
-                                    <img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" style="width:5%" class="w3-round" alt="Norway">
-                                    <h2>Registration</h2>
-                                </div>
-                            </div>
-                        </header>
-                        <div class="w3-container">
-                            <form:form method="POST" class="w3-container  w3-transparent" action="">
-
-                                <div class="w3-row">
-                                    <form:input placeholder="User Name" class="w3-input w3-border w3-round" path="userName" type="text" />
-                                    <br/>
-                                </div>
-                                <div class="w3-row">
-                                    <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="text" />
-                                </div>
-                                <div class="w3-row">
-                                    <div class="s6 w3-left-align">
-                                        <input type="submit" class="w3-button w3-black" value="Register">
-                                    </div>
-                                    <div class="s6 w3-right-align">
-                                        <input onclick="hideRegistrationForm()" type="button" class="w3-button w3-black" value="Cancel">
-                                    </div>
-                                </div>
-                                <br/>
-                            </form:form>
-                        </div>
-                        <footer class="w3-container ">
-                            <p>Modal Footer</p>
-                        </footer>
-                    </div>
-                </div>
+        
     
 
         </body>
 
-        <script type="text/javascript">
-            function showRegistrationForm() {
-                document.getElementById('id01').style.display = 'block';
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('footer').style.display = 'none';
 
-            }
 
-            function hideRegistrationForm() {
-                document.getElementById('id01').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('footer').style.display = 'block';
-            }
-        </script>
 
         </html>
