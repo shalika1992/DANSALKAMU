@@ -6,55 +6,62 @@
 <html>
 <head>
 <title>IBS</title>
-<style type="text/css">
-
-	.row{
-		width:100%;
-		height:100px;
-		background-color: gray;
-	}
-
-
-</style>
-
-
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/img/logo/logo.png" />
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <link 
+	href="${pageContext.request.contextPath}/resources/css/welcome.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	body{
+
+		background-image: url("resources/img/logo/welcomePage.png");
+	}
+	#a_block_two{
+		background: rgba(255,175,75,1);
+		background-image: url("resources/img/welcomePage/a4.png");
+		background-repeat:no-repeat;
+		background-size:contain;
+		background-position:center;
+	}
+
+</style>
    
-   <style type="text/css">
-   	body {
-			  background-image: url("resources/img/logo/welcomePage.png");
-		}
-  
-   
-   </style>
+
    
 </head>
   
-   <body class="w3-light-grey">
+<!--    <body class="w3-light-grey"> -->
+<body>
       <div class="w3-container">
          <h2 class="w3-center">Internet Banking System</h2>
 
-      </div>
+     
       <div class="w3-row w3-row-padding">
             <p class="w3-center">
                <a href="loadLogin.html">Login</a>
             </p>
       </div>
-      <div class="w3-row">
- 		 <div class="w3-col s2 w3-green w3-center" style="height:200px"><p>s3</p></div>
-  		 <div class="w3-col s2 w3-dark-grey w3-center" style="height:200px"><p>s9</p></div>
-  		 <div class="w3-col s2 w3-green w3-center" style="height:200px"><p>s3</p></div>
-  		 <div class="w3-col s2 w3-dark-grey w3-center" style="height:200px"><p>s9</p></div>
-  		 <div class="w3-col s2 w3-green w3-center" style="height:200px"><p>s3</p></div>
-  		 <div class="w3-col s2 w3-dark-grey w3-center" style="height:200px"><p>s9</p></div>
+      <div class="w3-row" id="a_block">
+ 		 <div id="a_block_one" class="w3-col    m2 w3-center" style="height:200px"></div>
+  		 <div id="a_block_two"class="w3-col s6 m2  w3-center" style="height:200px"> </div>
+  		 <div id="a_block_three"class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div id="a_block_four"class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
+  		 <div id="a_block_five"class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div id="a_block_six "class="w3-col    m2 w3-center" style="height:200px"></div>
+	</div>   
+	 <div class="w3-row" id="b_block">
+ 		 <div class="w3-col    m2 w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
+  		 <div class="w3-col    m2 w3-center" style="height:200px"></div>
 	</div>
-	<div class="row">
-		skdfsdkf
-	</div>
+
+</div>
+
+
    </body>
 </html>
-/html>
