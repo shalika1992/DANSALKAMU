@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
@@ -23,36 +25,38 @@
  <a class="w3-button w3-circle w3-black" href="map.html">+</a>
  
   </div>
-  <h2>Centering Content in Table</h2>
+<form:form id="loginForm" class="w3-container" method="POST" action="loginaa.html" modelAttribute="loginInputBean" >
 
-  <table class="w3-table-all w3-centered" >
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Points</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>Adam</td>
-      <td>Johnson</td>
-      <td>67</td>
-    </tr>
-    <tr>
-      <td>Bo</td>
-      <td>Nilson</td>
-      <td>35</td>
-    </tr>
-  </table>
-</div>
+			
+	<input class="w3-button w3-black" type="submit" value="Submit" />
+</form:form>
+
+
+  <div class="w3-container">
+
+		<table  class="w3-table-all w3-hoverable">
+			 <thead>
+        	<tr class="w3-light-grey">
+            <td>Id</td>
+            <td>Name</td>
+            <td>Longitute</td>
+            <td>Latitute</td>
+
+        </tr>
+      </thead>
+        
+              <tbody>
+        <c:forEach  items="${list}" var="tester">
+            <tr class="w3-light-grey">
+                <td>${tester.id}</td>
+                <td>${tester.name}</td>
+                <td>${tester.longitute}</td>
+                <td>${tester.latitute}</td>
+            </tr>
+        </c:forEach>
+      </tbody>
+</table>
+</div></div>
 <!--------------- START ADD DANSALA MODAL---------------->
 	
   <div id="add_dansala_model" class="w3-modal">

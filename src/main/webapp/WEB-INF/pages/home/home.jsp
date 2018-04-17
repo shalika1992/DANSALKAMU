@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
