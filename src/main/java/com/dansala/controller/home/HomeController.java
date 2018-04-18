@@ -19,11 +19,6 @@ import com.dansala.bean.session.SessionBean;
 import com.dansala.dao.dansala.impl.DansalaDAOImpl;
 
 
-
-
-
-
-
 @Controller
 public class HomeController {
 	

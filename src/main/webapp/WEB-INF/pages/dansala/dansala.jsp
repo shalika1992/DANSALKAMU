@@ -23,13 +23,8 @@
 <div class="row">
 <button class="w3-button w3-circle w3-black"  onclick="document.getElementById('add_dansala_model').style.display='block'">+</button>
  <a class="w3-button w3-circle w3-black" href="map.html">+</a>
- 
-  </div>
-<form:form id="loginForm" class="w3-container" method="POST" action="loginaa.html" modelAttribute="loginInputBean" >
+ </div>
 
-			
-	<input class="w3-button w3-black" type="submit" value="Submit" />
-</form:form>
 
 
   <div class="w3-container">

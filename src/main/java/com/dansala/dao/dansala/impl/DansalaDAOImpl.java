@@ -47,10 +47,8 @@ public class DansalaDAOImpl {
 					dansalaBean.setName((String)record.get("NAME"));
 					dansalaBean.setLatitute((Float)record.get("LATITUTE"));
 					dansalaBean.setLongitute((Float)record.get("LONGITUTE"));
-				
 					dansalList.add(dansalaBean);
-					
-					System.out.println(dansalaBean.toString());
+
 				}
 			}
 		}catch(Exception e){
