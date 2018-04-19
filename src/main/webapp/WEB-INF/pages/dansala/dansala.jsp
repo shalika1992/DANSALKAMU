@@ -34,8 +34,8 @@
         	<tr class="w3-light-grey">
             <td>Id</td>
             <td>Name</td>
-            <td>Longitute</td>
-            <td>Latitute</td>
+            <td>Longitude</td>
+            <td>Latitude</td>
 
         </tr>
       </thead>
@@ -45,8 +45,8 @@
             <tr class="w3-light-grey">
                 <td>${tester.id}</td>
                 <td>${tester.name}</td>
-                <td>${tester.longitute}</td>
-                <td>${tester.latitute}</td>
+                <td>${tester.longitude}</td>
+                <td>${tester.latitude}</td>
             </tr>
         </c:forEach>
       </tbody>
@@ -61,9 +61,10 @@
       	<div class="w3-row w3-center w3-black"><h5>Add Branch</5></div>
       	<div>
       	<hr/>
+      	      <form:form method="POST" class="w3-container  w3-light-grey" action="addDansala.html" >
       		<div class="w3-row">
       			<div class="w3-col s12 m3">Name</div>
-      			<div class="w3-col s12 m9">   <input class="w3-input w3-border w3-light-grey" type="text"></div>
+      			<div class="w3-col s12 m9">   <form:input path="name" class="w3-input w3-border w3-light-grey" type="text"/> </div>
       		</div>
       		 <div class="w3-row">
       			<div class="w3-col  s12 m3">Category</div>
@@ -71,18 +72,20 @@
       		</div>
       		 <div class="w3-row">
       			<div class="w3-col s12 m3">Longitude</div>
-      			<div class="w3-col s12 m9">  <input class="w3-input w3-border w3-light-grey" type="text"></div>
+      			<div class="w3-col s12 m9">  <form:input path="longitude" class="w3-input w3-border w3-light-grey" type="text"/> </div>
       		</div>
       		 <div class="w3-row">
       			<div class="w3-col s12 m3">Latitude</div>
-      			<div class="w3-col s12 m9">  <input class="w3-input w3-border w3-light-grey" type="text"></div>
+      			<div class="w3-col s12 m9">  <form:input path="latitude" class="w3-input w3-border w3-light-grey" type="text"/> </div>
       		</div>
       		
       		<div class="w3-row w3-center">
-      			  <button class="w3-button w3-black w3-round-large">Submit</button>
+      			  <input type="submit" value="Add"  class="w3-button w3-black w3-round-large"/>
       		      <button class="w3-button w3-black w3-round-large" onclick="document.getElementById('add_dansala_model').style.display='none'">Cancel</button>
       		</div>
+      		 </form:form>
       	</div>
+   
       	<hr/>
   
       </div>

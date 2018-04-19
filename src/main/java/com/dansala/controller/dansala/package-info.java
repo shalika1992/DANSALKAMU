@@ -5,4 +5,4 @@
  * @author supul_g
  *
  */
-package com.dansala.dao.dansala.impl;
+package com.dansala.controller.dansala;

@@ -1,4 +1,4 @@
-package com.dansala.dao.dansala.impl;
+package com.dansala.dao.dansala;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,8 @@ public class DansalaDAOImpl {
 	
 	private final Log logger = LogFactory.getLog(getClass());
 	
-	private final String sqlDansalaList ="SELECT ID,NAME,LONGITUTE,LATITUTE FROM DANSAL ";
+	private final String sqlDansalaList ="SELECT ID,NAME,LONGITUDE,LATITUDE FROM DANSAL";
+	private final String sqlAddDansala  ="INSERT INTO DANSAL(NAME,LONGITUDE,LATITUDE) VALUES(?,?,?)";
 	
 
 	public List<DansalaBean> getDansalList() throws Exception {
@@ -45,8 +46,8 @@ public class DansalaDAOImpl {
 					
 					dansalaBean.setId((int)record.get("ID"));
 					dansalaBean.setName((String)record.get("NAME"));
-					dansalaBean.setLatitute((Float)record.get("LATITUTE"));
-					dansalaBean.setLongitute((Float)record.get("LONGITUTE"));
+					dansalaBean.setLatitude((Float)record.get("LATITUDE"));
+					dansalaBean.setLongitude((Float)record.get("LONGITUDE"));
 					dansalList.add(dansalaBean);
 
 				}
@@ -56,5 +57,23 @@ public class DansalaDAOImpl {
 			throw e;
 		}
 		return dansalList;
+	}
+	
+	public DansalaBean adddansala(DansalaBean dansalaBean){
+		Object [] parameters = {dansalaBean.getName(),dansalaBean.getLongitude(),dansalaBean.getLatitude()};
+		try {
+			int rows = jdbcTemplate.update(sqlAddDansala, parameters);
+
+			if (rows == 1) {
+				return dansalaBean;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			logger.error("Exception  :  " , e);
+			throw e;
+		}
+		
+
 	}
 }

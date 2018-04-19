@@ -6,7 +6,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
     
       #map {
@@ -31,29 +33,42 @@
     </div>
     <script>
     
-    
-   
-      
-      function initMap() {
+ function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: {lat: 7.550253, lng: 80.753775}
   });
 
-  setMarkers(map);
+	getDansalInfo(map); 
 }
 
-// Data for the markers consisting of a name, a LatLng and a zIndex for the
-// order in which these markers should display on top of each other.
-var beaches = [
-  ['Bondi Beach',7.472398, 80.395909, 4],
-  ['Coogee Beach', 7.147198, 80.528191, 5],
-  ['Cronulla Beach', 7.536796, 81.129514, 3],
-  ['Manly Beach', 8.375041, 80.574667, 2],
-  ['Maroubra Beach', 6.881776, 80.929571, 1]
-];
 
-function setMarkers(map) {
+
+function getDansalInfo(map){
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "getAllDansalJSON.json",
+			data:"", 
+			dataType : 'json',
+			timeout : 10000,
+			success : function(data) {
+				if (data.message=="SUCCESS") {
+				   var dansalList=data.dansalAllList; 
+				   	setMarkers(map,dansalList);
+				}
+			},
+			error : function(e) {
+			},
+			done : function(x) {
+				console.log("DONE");
+			}
+		});
+
+}
+
+	
+function setMarkers(map,dansalList) {
   // Adds markers to the map.
 
   // Marker sizes are expressed as a Size of X,Y where the origin of the image
@@ -63,6 +78,7 @@ function setMarkers(map) {
   // direction to the right and in the Y direction down.
   var image = {
     url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+
     // This marker is 20 pixels wide by 32 pixels high.
     size: new google.maps.Size(20, 32),
     // The origin for this image is (0, 0).
@@ -77,15 +93,15 @@ function setMarkers(map) {
     coords: [1, 1, 1, 20, 18, 20, 18, 1],
     type: 'poly'
   };
-  for (var i = 0; i < beaches.length; i++) {
-    var beach = beaches[i];
+  for (var i = 0; i < dansalList.length; i++) {
+    var dansala = dansalList[i];
     var marker = new google.maps.Marker({
-      position: {lat: beach[1], lng: beach[2]},
+      position: {lat: dansala.latitude, lng: dansala.longitude},
       map: map,
       icon: image,
       shape: shape,
-      title: beach[0],
-      zIndex: beach[3]
+      title: dansala.name,
+   
     });
   }
 }

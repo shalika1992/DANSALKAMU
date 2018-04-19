@@ -4,8 +4,8 @@ public class DansalaBean {
 	
 	private int id;
 	private String name;
-	private float longitute;
-	private float latitute;
+	private float longitude;
+	private float latitude;
 	/**
 	 * @return the id
 	 */
@@ -31,29 +31,30 @@ public class DansalaBean {
 		this.name = name;
 	}
 	/**
-	 * @return the longitute
+	 * @return the longitude
 	 */
-	public float getLongitute() {
-		return longitute;
+	public float getLongitude() {
+		return longitude;
 	}
 	/**
-	 * @param longitute the longitute to set
+	 * @param longitude the longitude to set
 	 */
-	public void setLongitute(float longitute) {
-		this.longitute = longitute;
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
 	}
 	/**
-	 * @return the latitute
+	 * @return the latitude
 	 */
-	public float getLatitute() {
-		return latitute;
+	public float getLatitude() {
+		return latitude;
 	}
 	/**
-	 * @param latitute the latitute to set
+	 * @param latitude the latitude to set
 	 */
-	public void setLatitute(float latitute) {
-		this.latitute = latitute;
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
 	}
+
 
 
 

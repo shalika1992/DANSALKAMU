@@ -18,6 +18,7 @@ id="WebApp_ID" version="3.1">
 <servlet-mapping>  
     <servlet-name>spring</servlet-name>  
     <url-pattern>*.html</url-pattern>  
+    <url-pattern>*.json</url-pattern>  
 </servlet-mapping>  
   
 </web-app>
