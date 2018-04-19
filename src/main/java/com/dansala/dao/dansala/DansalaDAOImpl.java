@@ -59,7 +59,7 @@ public class DansalaDAOImpl {
 		return dansalList;
 	}
 	
-	public DansalaBean adddansala(DansalaBean dansalaBean){
+	public DansalaBean addDansala(DansalaBean dansalaBean){
 		Object [] parameters = {dansalaBean.getName(),dansalaBean.getLongitude(),dansalaBean.getLatitude()};
 		try {
 			int rows = jdbcTemplate.update(sqlAddDansala, parameters);

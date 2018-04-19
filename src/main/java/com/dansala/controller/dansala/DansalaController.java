@@ -13,20 +13,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dansala.bean.dansala.DansalaBean;
 import com.dansala.bean.login.LoginBean;
 import com.dansala.dao.dansala.DansalaDAOImpl;
+import com.dansala.service.dansala.DansalaServiceImpl;
 
 @Controller
 public class DansalaController {
 	
 	@Autowired
-    DansalaDAOImpl  dansalaDAO;
+    DansalaServiceImpl dansalaService;
 	
 	
 	@RequestMapping(value="/addDansala", method=RequestMethod.POST)
 	public ModelAndView addDansala(@ModelAttribute("DansalaBean")DansalaBean dansalaBean,ModelMap modelMap) {
 		ModelAndView modelandview=new ModelAndView();
 		try{
-			dansalaDAO.adddansala(dansalaBean);
-			List<DansalaBean> list= dansalaDAO.getDansalList();
+			dansalaService.addDansala(dansalaBean);
+			List<DansalaBean> list= dansalaService.getDansalList();
 			modelandview = new ModelAndView("dansalaPage","list",list);
 			modelandview.addObject("command",new DansalaBean());
 		}

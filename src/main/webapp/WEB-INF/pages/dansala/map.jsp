@@ -95,6 +95,9 @@ function setMarkers(map,dansalList) {
   };
   for (var i = 0; i < dansalList.length; i++) {
     var dansala = dansalList[i];
+    var infowindow = new google.maps.InfoWindow({
+          content: dansala.name
+        });
     var marker = new google.maps.Marker({
       position: {lat: dansala.latitude, lng: dansala.longitude},
       map: map,
@@ -103,6 +106,9 @@ function setMarkers(map,dansalList) {
       title: dansala.name,
    
     });
+     marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
   }
 }
     </script>
