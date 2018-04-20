@@ -28,8 +28,15 @@ public class AuthenticateController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("LoginBean")LoginBean LoginBean,ModelMap modelMap){		
-		return "home";
+	public ModelAndView login(@ModelAttribute("LoginBean")LoginBean loginBean,ModelMap modelMap){		
+		UserBean userBean=authenticateService.authenticateUser(loginBean);
+		if(userBean==null){
+			return new ModelAndView("login", "command", new LoginBean());
+		}
+		else{
+			return new ModelAndView("home");
+		}
+		
 	}
 
 	@RequestMapping(value="/loadRegistrationPage", method=RequestMethod.GET)
