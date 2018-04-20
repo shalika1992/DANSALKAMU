@@ -1,4 +1,4 @@
-package com.dansala.controller.login;
+package com.dansala.controller.authenticate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dansala.bean.dansala.DansalaBean;
 import com.dansala.bean.login.LoginBean;
+import com.dansala.bean.user.UserBean;
+import com.dansala.dao.authenticate.AuthenticateDAOImpl;
+import com.dansala.service.authenticate.AuthenticateServiceImpl;
 
 @Controller
-public class LoginController {
+public class AuthenticateController {
 	
 	@Autowired
+	AuthenticateServiceImpl authenticateService;
+	
 /*	private UserService userService;*/
 	
 	@RequestMapping(value="/loadLogin", method=RequestMethod.GET)
@@ -26,11 +32,24 @@ public class LoginController {
 		return "home";
 	}
 
-	@RequestMapping(value="/register", method=RequestMethod.GET)
+	@RequestMapping(value="/loadRegistrationPage", method=RequestMethod.GET)
 	public ModelAndView loadRegisterPage(){		
-		return new ModelAndView("register");
+		return new ModelAndView("register", "command", new UserBean());
 }
 
+	@RequestMapping(value="/registerUser", method=RequestMethod.POST)
+	public ModelAndView registerUser(@ModelAttribute("UserBean")UserBean userBean,ModelMap modelMap){		
+		
+		userBean=authenticateService.registerUser(userBean);
+		if(userBean!=null){
+			return new ModelAndView("home");
+			
+		}
+		else{
+			return new ModelAndView("register");
+		
+		}
+}
 
 
 }

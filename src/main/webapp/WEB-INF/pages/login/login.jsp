@@ -37,7 +37,7 @@
                         <br/>
                     </form:form>
 
-                    <a href="#" onclick="showRegistrationForm()">Register</a>
+                    <a href="loadRegistrationPage.html" >Register</a>
                 </div>
                 </div>
         

@@ -93,22 +93,30 @@ function setMarkers(map,dansalList) {
     coords: [1, 1, 1, 20, 18, 20, 18, 1],
     type: 'poly'
   };
+
   for (var i = 0; i < dansalList.length; i++) {
     var dansala = dansalList[i];
-    var infowindow = new google.maps.InfoWindow({
-          content: dansala.name
-        });
     var marker = new google.maps.Marker({
       position: {lat: dansala.latitude, lng: dansala.longitude},
       map: map,
       icon: image,
       shape: shape,
       title: dansala.name,
-   
     });
-     marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
+    
+      var infowindow = new google.maps.InfoWindow();
+      
+    google.maps.event.addListener(marker, "click", (function(marker) {
+      // !!! PROBLEM HERE
+      return function(evt) {
+        var content = marker.getTitle();
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+      }
+    })(marker));
+
+
+
   }
 }
     </script>

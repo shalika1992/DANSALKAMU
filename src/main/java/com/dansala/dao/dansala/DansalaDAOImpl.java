@@ -21,12 +21,6 @@ import com.dansala.util.varlist.CommonVarList;
 public class DansalaDAOImpl {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	CommonVarList commonVarList;
-	
-	@Autowired
-	Common common;
 	
 	private final Log logger = LogFactory.getLog(getClass());
 	

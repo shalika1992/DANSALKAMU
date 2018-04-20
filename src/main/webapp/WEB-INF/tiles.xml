@@ -46,8 +46,8 @@
 		<put-attribute name="body" value="/WEB-INF/pages/dbtest/dbtest.jsp" />
 	</definition> 
 	
-		<definition name="register" extends="baseTemplate">
-		<put-attribute name="title" value="IBS|Home"/>
+		<definition name="register" extends="loginTemplate">
+		<put-attribute name="title" value="IBS|Register"/>
 		<put-attribute name="body" value="/WEB-INF/pages/register/register.jsp" />
 	</definition>
 
