@@ -1,19 +1,36 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/mvc 
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
   
   	<mvc:annotation-driven></mvc:annotation-driven>
     <context:component-scan  
         base-package="com.dansala">  </context:component-scan>
-        
         <context:annotation-config></context:annotation-config>
-	
 	<context:property-placeholder location="classpath:propertyfile/main.properties"></context:property-placeholder>
-        
+     
+     <mvc:interceptors>
+     	<mvc:interceptor>
+     		
+     		<bean class="com.dansala.util.interceptor.CheckAccessInterceptor">
+				<property name="sessionBean" ref="sessionBean" />
+
+			</bean>
+     	
+     	</mvc:interceptor>
+     
+     
+     </mvc:interceptors>   
   
     <bean id="viewResolver"  
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">  
@@ -39,7 +56,7 @@
 	</bean>
 		
 	<bean id="sessionBean" class="com.dansala.bean.session.SessionBean" scope="session">
-	<!-- 	<aop:scoped-proxy/> -->
+	<!-- 	<aop:scoped-proxy/>  -->
 	</bean>
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
