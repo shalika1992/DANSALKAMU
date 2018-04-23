@@ -10,42 +10,32 @@
 
         <body>
 
-            <div class="w3-row w3-row-padding" id="loginForm">
-                <div class="w3-col  l8 m8 s12  w3-center" style="hight:100%">
-                    <p>..</p>
-                </div>
-                <div class="w3-col  l4 m4 s12  w3-center" style="hight:100%" >
-                    <form:form method="POST" class="w3-container  w3-light-grey" action="login.html">
+            <div class=" w3-sand w3-center" style="width:50%;margin:auto;">
+                <form:form method="POST" class="w3-container  w3-light-grey" action="login.html">
+                    <br/>
+                    <div class="w3-row">
+                        <img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" style="width:20%" class="w3-round" alt="Norway">
+                    </div>
+                    <br/>
+                    <div class="w3-row">
+                        <form:input placeholder="User Name" class="w3-input w3-border w3-round" path="userName" type="text" />
                         <br/>
-                        <div class="w3-row">
-                            <img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" style="width:20%" class="w3-round" alt="Norway">
+                    </div>
+                    <div class="w3-row">
+                        <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="text" />
+                    </div>
+                    <div class="w3-row">
+                        <div class="s8 w3-left-align">forgot password?</div>
+                        <div class="s4 w3-right-align">
+                            <input type="submit" class="w3-button w3-black" value="Sign In">
                         </div>
-                        <br/>
-                        <div class="w3-row">
-                            <form:input placeholder="User Name" class="w3-input w3-border w3-round" path="userName" type="text" />
-                            <br/>
-                        </div>
-                        <div class="w3-row">
-                            <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="text" />
-                        </div>
-                        <div class="w3-row">
-                            <div class="s8 w3-left-align">forgot password?</div>
-                            <div class="s4 w3-right-align">
-                                <input type="submit" class="w3-button w3-black" value="Sign In">
-                            </div>
-                        </div>
-                        <br/>
-                    </form:form>
+                    </div>
+                    <br/>
+                </form:form>
 
-                    <a href="loadRegistrationPage.html" >Register</a>
-                </div>
-                </div>
-        
-    
+                <a href="loadRegistrationPage.html">Register</a>
+            </div>
 
         </body>
-
-
-
 
         </html>

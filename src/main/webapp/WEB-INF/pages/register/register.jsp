@@ -8,14 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-        <body>
-
-            <div class="w3-row w3-row-padding" id="loginForm">
-                <div class="w3-col  l8 m8 s12  w3-center" style="hight:100%">
-                    <p>..</p>
-                </div>
-                <div class="w3-col  l4 m4 s12  w3-center" style="hight:100%" >
-                    <form:form method="POST" class="w3-container  w3-light-grey" action="registerUser.html">
+        <body>       
+                <div class=" w3-sand w3-center" style="width:50%;margin:auto;">
+                 <form:form method="POST" class="w3-container  w3-light-grey" action="registerUser.html">
                         <br/>
                         <div class="w3-row">
                             <img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" style="width:20%" class="w3-round" alt="Norway">
@@ -41,9 +36,9 @@
                         <br/>
                         
                     </form:form>
-                      <a href="loadLogin.html" >Login</a>
-                </div>
-                </div>
+
+                 <a href="loadLogin.html" >Login</a>
+            </div>
 
         </body>
 

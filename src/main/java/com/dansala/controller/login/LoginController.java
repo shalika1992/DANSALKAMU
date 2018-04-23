@@ -1,4 +1,4 @@
-package com.dansala.controller.authenticate;
+package com.dansala.controller.login;
 
 import java.util.Locale;
 
@@ -22,7 +22,7 @@ import com.dansala.util.validator.UserBeanValidator;
 
 
 @Controller
-public class AuthenticateController {
+public class LoginController {
 	
 	@Autowired
 	AuthenticateServiceImpl authenticateService;
@@ -38,8 +38,7 @@ public class AuthenticateController {
 				LoginBean.class.getSimpleName())){
 			binder.addValidators(loginBeanValidator);
 	   }
-		
-		
+			
 	}
 	
 	@RequestMapping(value="/loadLogin", method=RequestMethod.GET)
@@ -64,22 +63,6 @@ public class AuthenticateController {
 		}
 	}
 
-	@RequestMapping(value="/loadRegistrationPage", method=RequestMethod.GET)
-	public ModelAndView loadRegisterPage(){		
-		return new ModelAndView("register", "command", new UserBean());
-}
 
-	@RequestMapping(value="/registerUser", method=RequestMethod.POST)
-	public ModelAndView registerUser(@ModelAttribute("UserBean")UserBean userBean,ModelMap modelMap){		
-		userBean=authenticateService.registerUser(userBean);
-		if(userBean!=null){
-			return new ModelAndView("home");
-			
-		}
-		else{
-			return new ModelAndView("register");
-		
-		}
-}
 	
 }
