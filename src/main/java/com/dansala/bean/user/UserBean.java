@@ -6,6 +6,7 @@ public class UserBean {
 	private String userName;
 	private String password;
 	private String phoneNumber;
+	private String reEnterPassword;
 	/**
 	 * @return the userId
 	 */
@@ -54,4 +55,18 @@ public class UserBean {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	/**
+	 * @return the reEnterPassword
+	 */
+	public String getReEnterPassword() {
+		return reEnterPassword;
+	}
+	/**
+	 * @param reEnterPassword the reEnterPassword to set
+	 */
+	public void setReEnterPassword(String reEnterPassword) {
+		this.reEnterPassword = reEnterPassword;
+	}
+	
+
 }

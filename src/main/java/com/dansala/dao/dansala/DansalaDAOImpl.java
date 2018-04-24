@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.dansala.bean.dansala.DansalaBean;
+import com.dansala.util.common.Common;
+import com.dansala.util.varlist.CommonVarList;
 
 
 @Repository

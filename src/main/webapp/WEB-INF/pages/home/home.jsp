@@ -41,7 +41,7 @@
         <h4>Messages</h4>
       </div>
     </a>
-    <div class="w3-quarter">
+    <div class="w3-quarter" onclick="document.getElementById('addCategory').style.display='block'">
       <div class="w3-container w3-blue w3-padding-16">
         <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
         <div class="w3-right">
@@ -237,6 +237,52 @@
       </div>
     </div>
   </div>
+  
+<!----------------------   START ADD CATEGORY MODEL ---------------------->
+
+	 <div id="addCategory" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-gray"> 
+        <span onclick="document.getElementById('addCategory').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h4 class="w3-center">Add Category</h4>
+      </header>
+      <div class="w3-container">
+      <br/>
+     	 <div class="w3-row">
+     	  <div class="w3-row">
+     	  	<div class="w3-col l4">
+	        <label>Select Icon</label>
+	        </div>
+	   		<div class="w3-col l8">
+			<select class="w3-select" name="option">
+			  <option value="" disabled selected>Choose your option</option>
+			  <option value="1">Option 1</option>
+			  <option value="2">Option 2</option>
+			  <option value="3">Option 3</option>
+			</select>
+			</div>
+		 </div>
+		 <div class="w3-row">
+		 	<div class="w3-col l4">
+			<label>Add Name</label>
+			</div>
+			<div class="w3-col l8">
+			<input class="w3-input" type="text">
+			</div>
+		</div>	
+
+		</div>
+		 <br/>
+      </div>
+      <footer class="w3-container w3-gray">
+        
+      </footer>
+    </div>
+  </div>
+
+  
+<!----------------------   END ADD CATEGORY MODEL ------------------------> 
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">

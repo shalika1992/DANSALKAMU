@@ -54,4 +54,8 @@ public class DansalaBean {
 	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
+
+
+
+
 }
