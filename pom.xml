@@ -19,6 +19,11 @@
     <jstl-version>1.2</jstl-version>
     <java.version>1.8</java.version>
     <jackson.version>2.6.3</jackson.version>
+    
+    <junit.version>4.12</junit.version>
+    <jbehave.version>4.0.4</jbehave.version>
+	<javax.version>3.0.1</javax.version>
+	
   </properties>
   
   <dependencies>
@@ -113,5 +118,47 @@
          <artifactId>jackson-databind</artifactId>
          <version>${jackson.version}</version>
       </dependency>
+      
+      	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+			<version>${jbehave.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-spring</artifactId>
+			<version>${jbehave.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-gherkin</artifactId>
+			<version>${jbehave.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>5.1.46</version>
+			</dependency>
+		
+      
   </dependencies>
 </project>
