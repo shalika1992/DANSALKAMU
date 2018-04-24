@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
-<!DOCTYPE tiles-definitions PUBLIC  
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"  
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">  
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">  
 <tiles-definitions>  
-    <definition name="baseTemplate"
-		template="/WEB-INF/pages/template/layout.jsp">
+	<!-- welcome template -->
+    <definition name="welcomeTemplate" template="/WEB-INF/pages/template/welcome/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/pages/template/welcome/footer.jsp" />
+	</definition>
+	
+	<!-- login template -->
+	<definition name="loginTemplate" template="/WEB-INF/pages/template/loginLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/pages/template/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/pages/template/footer.jsp" />
+	</definition>
+	
+	<!-- base template -->
+	<definition name="baseTemplate" template="/WEB-INF/pages/template/layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/pages/template/header.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/pages/template/menu.jsp" />
@@ -12,23 +25,24 @@
 		<put-attribute name="footer" value="/WEB-INF/pages/template/footer.jsp" />
 	</definition>
 	
-	  <definition name="loginTemplate"
-		template="/WEB-INF/pages/template/loginLayout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/WEB-INF/pages/template/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/pages/template/footer.jsp" />
-	</definition>
-
-	
-	<definition name="home" extends="baseTemplate">
+	<definition name="welcome" extends="welcomeTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
-		<put-attribute name="body" value="/WEB-INF/pages/home/home.jsp" />
+		<put-attribute name="body" value="/WEB-INF/pages/welcome/welcome.jsp" />
 	</definition>
 	
 	<definition name="login" extends="loginTemplate">
 		<put-attribute name="title" value="IBS|Login" />
 		<put-attribute name="body" value="/WEB-INF/pages/login/login.jsp" />
+	</definition>
+	
+	<definition name="register" extends="loginTemplate">
+		<put-attribute name="title" value="IBS|Register"/>
+		<put-attribute name="body" value="/WEB-INF/pages/register/register.jsp" />
+	</definition>
+	
+	<definition name="home" extends="baseTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/home/home.jsp" />
 	</definition>
 	
 	<definition name="dansalaPage" extends="baseTemplate">
@@ -40,15 +54,4 @@
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/dansala/map.jsp" />
 	</definition>
-	
-		<definition name="loginaa" extends="baseTemplate">
-		<put-attribute name="title" value="IBS|Home"/>
-		<put-attribute name="body" value="/WEB-INF/pages/dbtest/dbtest.jsp" />
-	</definition> 
-	
-		<definition name="register" extends="loginTemplate">
-		<put-attribute name="title" value="IBS|Register"/>
-		<put-attribute name="body" value="/WEB-INF/pages/register/register.jsp" />
-	</definition>
-
 </tiles-definitions>

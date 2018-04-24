@@ -46,32 +46,22 @@ public class AuthenticateDAOImpl {
 		Object [] parameters = {loginBean.getUserName()};
 		try {
 			List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(AUTHENTICATE_USER_BY_USER_NAME, parameters);
-
 			if (resultSet.size()== 1) {
 				for(Map<String,Object> record : resultSet){
-					/*System.out.println(record);
-					System.out.println(record.get("PASSWORD"));
-					System.out.println(record.get("userId"));
-					System.out.println(record.get("USERNAME"));
-					System.out.println(record.get("PASSWORD"));
-					System.out.println(record.get("PHONENUMBER"));*/
-					
 					if(record.get("PASSWORD").equals(loginBean.getPassword())){;
 					UserBean userBean=new UserBean();
-					userBean.setUserId ((int)record.get("USERID"));
-					userBean.setUserName((String)record.get("USERNAME"));
-					userBean.setPassword((String)record.get("PASSWORD"));
-					userBean.setPhoneNumber((String)record.get("PHONENUMBER"));
-					return userBean;
-				}		
+						userBean.setUserId ((int)record.get("USERID"));
+						userBean.setUserName((String)record.get("USERNAME"));
+						userBean.setPassword((String)record.get("PASSWORD"));
+						userBean.setPhoneNumber((String)record.get("PHONENUMBER"));
+						return userBean;
+					}		
 				}
 			}
-
 		} catch (Exception e) {
 			logger.error("Exception  :  " , e);
 			throw e;
 		}
-		
 		return null;
 	}
 

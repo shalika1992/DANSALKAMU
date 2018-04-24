@@ -34,7 +34,4 @@ public class DansalaJSONRespons {
 	public void setDansalAllList(List<DansalaBean> dansalAllList) {
 		this.dansalAllList = dansalAllList;
 	}
-
-
-
 }

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dansala.bean.dansala.DansalaBean;
-import com.dansala.bean.login.LoginBean;
-import com.dansala.dao.dansala.DansalaDAOImpl;
 import com.dansala.service.dansala.DansalaServiceImpl;
 
 @Controller
@@ -20,7 +18,6 @@ public class DansalaController {
 	
 	@Autowired
     DansalaServiceImpl dansalaService;
-	
 	
 	@RequestMapping(value="/addDansala", method=RequestMethod.POST)
 	public ModelAndView addDansala(@ModelAttribute("DansalaBean")DansalaBean dansalaBean,ModelMap modelMap) {
@@ -30,12 +27,9 @@ public class DansalaController {
 			List<DansalaBean> list= dansalaService.getDansalList();
 			modelandview = new ModelAndView("dansalaPage","list",list);
 			modelandview.addObject("command",new DansalaBean());
-		}
-		
-		catch(Exception e){
+		}catch(Exception e){
 			
 		}
 		return modelandview;
 	}
-
 }
