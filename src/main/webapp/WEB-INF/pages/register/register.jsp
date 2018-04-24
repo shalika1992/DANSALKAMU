@@ -24,15 +24,18 @@
                             <form:input placeholder="Phone Number" class="w3-input w3-border w3-round-large" path="phoneNumber" type="text" />
                             <br/>
                         </div>   
-                        <div class="w3-row">
-                            <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="text" />
+                        <div class="w3-row">                 
+                            <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="password" />
+                             <br/>
+                        </div>
+                         <div class="w3-row">
+                            <form:input placeholder="ReEnter Password" class="w3-input w3-border w3-round-large" path="reEnterPassword" type="password" />
                         </div>
                            <br/>
-                        <div class="w3-row">
-                            <div class="s4 w3-right-align">
-                                <input type="submit" class="w3-button w3-black" value="Register">
-                            </div>
-                        </div>
+                      <div class="w3-row  w3-center" style="width:40%;margin:auto;">
+					 <div class="w3-col  l6 m6 s6"> <input type="submit" class="w3-button w3-black" value="Sign Up"></div>
+					 <div class="w3-col  l6 m6 s6"> <a href="index.jsp" class="w3-button w3-black" >Cancle</a></div>
+				              </div>
                         <br/>
                         
                     </form:form>

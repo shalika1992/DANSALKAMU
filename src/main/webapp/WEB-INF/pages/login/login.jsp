@@ -22,14 +22,18 @@
                         <br/>
                     </div>
                     <div class="w3-row">
-                        <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="text" />
+                        <form:input placeholder="Password" class="w3-input w3-border w3-round-large" path="password" type="password" />
                     </div>
-                    <div class="w3-row">
-                        <div class="s8 w3-left-align">forgot password?</div>
-                        <div class="s4 w3-right-align">
-                            <input type="submit" class="w3-button w3-black" value="Sign In">
-                        </div>
+                    <br/>
+                    <div class="w3-row  w3-center" style="width:40%;margin:auto;">
+					 <div class="w3-col  l6 m6 s6"> <input type="submit" class="w3-button w3-black" value="Sign In"></div>
+					 <div class="w3-col  l6 m6 s6"> <a href="index.jsp" class="w3-button w3-black" >Cancle</a></div>
+				              </div>
+                    <div class="w3-row w3-center">
+                        <div >forgot password?</div>
+                  
                     </div>
+
                     <br/>
                 </form:form>
 

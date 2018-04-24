@@ -37,29 +37,29 @@
       <div class="w3-container">
          <h2 class="w3-center">Internet Banking System</h2>
 
-     
-      <div class="w3-row w3-row-padding">
-            <p class="w3-center">
-               <a href="loadLogin.html">Login</a>
-            </p>
-      </div>
+
+		<div class="w3-row  w3-center" style="width:40%;margin:auto;">
+			 <div class="w3-col  l6 m6 s6"> <a href="loadRegistrationPage.html">Sign UP</a></div>
+			 <div class="w3-col  l6 m6 s6"> <a href="loadLogin.html">Login</a></div>
+		</div>
+
+
       <div class="w3-row" id="a_block">
  		 <div id="a_block_one" class="w3-col    m2 w3-center" style="height:200px"></div>
   		 <div id="a_block_two"class="w3-col s6 m2  w3-center" style="height:200px"> </div>
-  		 <div id="a_block_three"class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div id="a_block_three"class="w3-col s6 m2 w3-light-grey w3-center" style="height:200px"></div>
   		 <div id="a_block_four"class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
-  		 <div id="a_block_five"class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div id="a_block_five"class="w3-col s6 m2 w3-light-grey w3-center" style="height:200px"></div>
   		 <div id="a_block_six "class="w3-col    m2 w3-center" style="height:200px"></div>
 	</div>   
 	 <div class="w3-row" id="b_block">
  		 <div class="w3-col    m2 w3-center" style="height:200px"></div>
-  		 <div class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-light-grey w3-center" style="height:200px"></div>
   		 <div class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
-  		 <div class="w3-col s6 m2 w3-green w3-center" style="height:200px"></div>
+  		 <div class="w3-col s6 m2 w3-light-grey w3-center" style="height:200px"></div>
   		 <div class="w3-col s6 m2 w3-dark-grey w3-center" style="height:200px"></div>
   		 <div class="w3-col    m2 w3-center" style="height:200px"></div>
 	</div>
-
 </div>
 
 
