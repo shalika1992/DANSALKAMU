@@ -1,7 +1,6 @@
 package com.dansala.service.authenticate;
 
 import org.apache.commons.logging.Log;
-
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,7 +26,7 @@ public class AuthenticateServiceImpl {
 	public String checkUserExists(LoginBean loginBean) {
 		String message = "";
 		try {
-			message = authenticateDAO.checkUserExists(loginBean);
+			UserBean userBean = authenticateDAO.checkUserExists(loginBean);
 		} catch (Exception e) {
 			logger.error("Exception  :  ", e);
 			throw e;
@@ -45,13 +44,11 @@ public class AuthenticateServiceImpl {
 			if (loginBean.getUserName().indexOf("'") >= 0 || loginBean.getUserName().indexOf('"') >= 0) {
 				return null;
 			} else {
-				return authenticateDAO.authenticateUser(loginBean);
+				return authenticateDAO.checkUserExists(loginBean);
 			}
 		} catch (Exception e) {
 			logger.error("Exception  :  ", e);
 			throw e;
-
 		}
-
 	}
 }

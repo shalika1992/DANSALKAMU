@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dansala.bean.register.RegisterUserBean;
 import com.dansala.bean.user.UserBean;
 import com.dansala.service.registration.RegistrationServiceImpl;
-import com.dansala.util.validator.UserBeanValidator;
+import com.dansala.util.validator.RegisterUserBeanValidator;
 
 @Controller
 public class RegistrationController {
@@ -23,7 +25,7 @@ public class RegistrationController {
 	RegistrationServiceImpl registrationService;
 
 	@Autowired
-	UserBeanValidator userBeanValidator;
+	RegisterUserBeanValidator userBeanValidator;
 
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
@@ -32,16 +34,16 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/loadRegistrationPage", method = RequestMethod.GET)
 	public ModelAndView loadRegisterPage() {
-		return new ModelAndView("register", "command", new UserBean());
+		return new ModelAndView("register", "command", new RegisterUserBean());
 	}
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public ModelAndView registerUser(@ModelAttribute("UserBean") @Valid UserBean userBean, BindingResult bindingResult,ModelMap modelMap, Locale locale) {
+	public ModelAndView registerUser(@ModelAttribute("RegisterUserBean") @Valid RegisterUserBean registerUserBean, BindingResult bindingResult,ModelMap modelMap, Locale locale) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("register", "command", new UserBean());
 		} else {
-			userBean = registrationService.registerUser(userBean);
-			if (userBean != null) {
+			registerUserBean = registrationService.registerUser(registerUserBean);
+			if (registerUserBean != null) {
 				return new ModelAndView("home");
 			} else {
 				return new ModelAndView("register", "command", new UserBean());

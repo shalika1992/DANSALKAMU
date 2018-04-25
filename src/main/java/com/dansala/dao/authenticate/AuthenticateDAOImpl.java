@@ -1,5 +1,6 @@
 package com.dansala.dao.authenticate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,44 +21,37 @@ public class AuthenticateDAOImpl {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
-	private final String AUTHENTICATE_USER_BY_USER_NAME = "SELECT USERID,USERNAME,PASSWORD,PHONENUMBER FROM USER WHERE USERNAME=?";
 	
-	public String checkUserExists(LoginBean loginBean) {
+	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,PHONENUMBER, "
+						+ "RESETLOGIN,FIRSTLOGIN,CHANNEL,VERIFYCODE,STATUSCODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
+						+ "FROM USER WHERE USERNAME=?";
+	  
+	public UserBean checkUserExists(LoginBean loginBean) {
+		UserBean userBean = null;
 		try{
-			
-		}catch(Exception e){
-			logger.error("Exception  :  ", e);
-			throw e;
-		}
-		return "";
-	}
-	
-	public UserBean authenticateUser(LoginBean loginBean) {
-		Object[] parameters = { loginBean.getUserName() };
-		try {
-			List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(AUTHENTICATE_USER_BY_USER_NAME, parameters);
-			if (resultSet.size() == 1) {
-				for (Map<String, Object> record : resultSet) {
-					if (record.get("PASSWORD").equals(loginBean.getPassword())) {
-						UserBean userBean = new UserBean();
+			List<Map<String, Object>> map = jdbcTemplate.queryForList(SQL_GETUSER_DETAILS_USERNAME, new Object[]{loginBean.getUserName()});
+			if(!map.isEmpty()){
+				for (Map<String, Object> record : map) {
+						userBean = new UserBean();
 						userBean.setUserId((long) record.get("USERID"));
 						userBean.setUserName((String) record.get("USERNAME"));
 						userBean.setPassword((String) record.get("PASSWORD"));
 						userBean.setPhoneNumber((String) record.get("PHONENUMBER"));
-						return userBean;
-					}
+						userBean.setResetLogin((int) record.get("RESETLOGIN"));
+						userBean.setFirstLogin((int) record.get("FIRSTLOGIN"));
+						userBean.setChannel((String) record.get("CHANNEL"));
+						userBean.setVerifyCode((String) record.get("VERIFYCODE"));
+						userBean.setStatusCode((String) record.get("STATUSCODE"));
+						userBean.setLastUpdatedUser((String) record.get("LASTUPDATEDUSER"));
+						userBean.setLastLoggedDate((Date) record.get("LASTLOGGEDTIME"));
+						userBean.setLastUpdatedTime((Date) record.get("LASTUPDATEDTIME"));
+						userBean.setCreatedTime((Date) record.get("CREATEDTIME"));
 				}
 			}
-		} catch (Exception e) {
+		}catch(Exception e){
 			logger.error("Exception  :  ", e);
 			throw e;
 		}
-
-		return null;
+		return userBean;
 	}
-
-
-	
-
 }
