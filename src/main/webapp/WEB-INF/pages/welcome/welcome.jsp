@@ -42,7 +42,7 @@ body {
 				<a href="loadRegistrationPage.html">Sign UP</a>
 			</div>
 			<div class="w3-col  l6 m6 s6">
-				<a href="loadLogin.html">Login</a>
+				<a href="login.html">Login</a>
 			</div>
 		</div>
 

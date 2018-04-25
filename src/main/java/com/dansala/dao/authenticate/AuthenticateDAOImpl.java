@@ -16,63 +16,48 @@ import com.dansala.bean.user.UserBean;
 @Repository
 @Scope("prototype")
 public class AuthenticateDAOImpl {
+	private final Log logger = LogFactory.getLog(getClass());
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	private final Log logger = LogFactory.getLog(getClass());
-	private final String ADD_USER_SQL  ="INSERT INTO USER(USERNAME,PASSWORD,PHONENUMBER) VALUES(?,?,?)";
-	private final String AUTHENTICATE_USER_BY_USER_NAME="SELECT USERID,USERNAME,PASSWORD,PHONENUMBER FROM USER WHERE USERNAME=?";
-	
-	
-	public UserBean registerUser(UserBean userBean){
-		Object [] parameters = {userBean.getUserName(),userBean.getPassword(),userBean.getPhoneNumber()};
-		try {
-			int rows = jdbcTemplate.update(ADD_USER_SQL, parameters);
 
-			if (rows == 1) {
-				return userBean;
-			} else {
-				return null;
-			}
-		} catch (Exception e) {
-			logger.error("Exception  :  " , e);
+	private final String AUTHENTICATE_USER_BY_USER_NAME = "SELECT USERID,USERNAME,PASSWORD,PHONENUMBER FROM USER WHERE USERNAME=?";
+	
+	public String checkUserExists(LoginBean loginBean) {
+		try{
+			
+		}catch(Exception e){
+			logger.error("Exception  :  ", e);
 			throw e;
 		}
-
+		return "";
 	}
 	
-	public UserBean authenticateUser(LoginBean loginBean){
-		Object [] parameters = {loginBean.getUserName()};
+	public UserBean authenticateUser(LoginBean loginBean) {
+		Object[] parameters = { loginBean.getUserName() };
 		try {
 			List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(AUTHENTICATE_USER_BY_USER_NAME, parameters);
-
-			if (resultSet.size()== 1) {
-				for(Map<String,Object> record : resultSet){
-					/*System.out.println(record);
-					System.out.println(record.get("PASSWORD"));
-					System.out.println(record.get("userId"));
-					System.out.println(record.get("USERNAME"));
-					System.out.println(record.get("PASSWORD"));
-					System.out.println(record.get("PHONENUMBER"));*/
-					
-					if(record.get("PASSWORD").equals(loginBean.getPassword())){;
-					UserBean userBean=new UserBean();
-					userBean.setUserId ((long)record.get("USERID"));
-					userBean.setUserName((String)record.get("USERNAME"));
-					userBean.setPassword((String)record.get("PASSWORD"));
-					userBean.setPhoneNumber((String)record.get("PHONENUMBER"));
-					return userBean;
-				}		
+			if (resultSet.size() == 1) {
+				for (Map<String, Object> record : resultSet) {
+					if (record.get("PASSWORD").equals(loginBean.getPassword())) {
+						UserBean userBean = new UserBean();
+						userBean.setUserId((long) record.get("USERID"));
+						userBean.setUserName((String) record.get("USERNAME"));
+						userBean.setPassword((String) record.get("PASSWORD"));
+						userBean.setPhoneNumber((String) record.get("PHONENUMBER"));
+						return userBean;
+					}
 				}
 			}
-
 		} catch (Exception e) {
-			logger.error("Exception  :  " , e);
+			logger.error("Exception  :  ", e);
 			throw e;
 		}
-		
+
 		return null;
 	}
+
+
+	
 
 }

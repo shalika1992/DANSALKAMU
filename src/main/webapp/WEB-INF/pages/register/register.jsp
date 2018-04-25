@@ -40,7 +40,7 @@
                         
                     </form:form>
 
-                 <a href="loadLogin.html" >Login</a>
+                 <a href="login.html" >Login</a>
             </div>
 
         </body>

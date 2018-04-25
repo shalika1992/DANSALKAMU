@@ -15,7 +15,7 @@
     <i class="fa fa-eye w3-xxlarge"></i>
     <p>PHOTOS</p>
   </a>
-  <a href="loadLogin.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="login.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-sign-out w3-xxlarge"></i>
     <p>LOGOUT</p>
   </a>
@@ -28,7 +28,7 @@
     <a href="homePage.html" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
     <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-    <a href="loadLogin.html" class="w3-bar-item w3-button" style="width:25% !important">LOGOUT</a>
+    <a href="login.html" class="w3-bar-item w3-button" style="width:25% !important">LOGOUT</a>
      
   </div>
 </div>

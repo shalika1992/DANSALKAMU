@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dansala.bean.dansala.DansalaBean;
 import com.dansala.dao.dansala.DansalaDAOImpl;
+
 @Repository
 @Scope("prototype")
 public class DansalaServiceImpl {

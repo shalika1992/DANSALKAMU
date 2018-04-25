@@ -5,8 +5,6 @@ import java.lang.reflect.Field;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.user.UserBean;
 
 @Component
