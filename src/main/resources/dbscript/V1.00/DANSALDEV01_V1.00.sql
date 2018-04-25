@@ -191,3 +191,10 @@ INSERT INTO status(code,description,category) values('ACT','Active','USER');
 <!-- user table -->
 INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,lastupdateduser) values 
 ('supul','supul@123','Supul','Gintota','supul@gmail.com','0712456789','0','0','WEB','1111','ACT','admin');
+
+
+CREATE TABLE `dansala`.`icon` (
+  `iconId` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(100) NOT NULL,
+  `flag` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`iconId`));

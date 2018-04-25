@@ -285,7 +285,23 @@
     <div class="w3-modal-content">
       <div class="w3-container">
         <span onclick="document.getElementById('iconModel').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<div id="icons">
+			<div id="icons" class="w3-row">
+				<div  class="w3-col m1 l1 s1"><img id="icon1" src="" style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon2" 
+					 style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon3"  onclick="selectImage('icon3')" style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon4" style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon5" style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon6"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon7"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon8"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon9"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon10"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon11"  style="width:80%" ></div>
+									<div  class="w3-col m1 l1 s1"><img id="icon12"  style="width:80%" ></div>
+					
+					
+				
 			</div>
    	   </div>
     </div>
@@ -330,11 +346,21 @@ function w3_close() {
 function loadIconList(){
 
 	document.getElementById('iconModel').style.display='block';
-	for (i = 0; i <20; i++) { 
-		$( "#icons" ).append( "<p>sdfsdf</p>"  );
-
+	for (i = 1; i <13; i++) { 
+	 
+	$("#icon"+i).attr("src","${pageContext.request.contextPath}/resources/img/logo/logo.png");
+		/* $( "#icons" ).append("<div  class="+'w3-col m1 l1 s1'+"><img src="+'${pageContext.request.contextPath}/resources/img/logo/logo.png'+
+		" style="+'width:10%'+" ></div>");
+ */
 	}
 
+}
+
+function selectImage(selectIconId){
+	var icon=document.getElementById('#'+selectIconId);
+	/* $('#'+selectIconId).attr("src","${pageContext.request.contextPath}/resources/img/welcomePage/a4.png"); */
+	$( '#'+selectIconId ).addClass("w3-opacity-max");
+	alert('#'+selectIconId);
 }
 </script>
 
