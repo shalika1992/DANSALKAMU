@@ -2,23 +2,25 @@ package com.dansala.bean.user;
 
 public class UserBean {
 	
-	private int userId;
+	private long userId;
 	private String userName;
 	private String password;
 	private String phoneNumber;
 	private String reEnterPassword;
+	
 	/**
 	 * @return the userId
 	 */
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
+	
 	/**
 	 * @return the userName
 	 */
@@ -31,6 +33,7 @@ public class UserBean {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
 	/**
 	 * @return the password
 	 */
@@ -43,6 +46,7 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	/**
 	 * @return the phoneNumber
 	 */
@@ -55,6 +59,7 @@ public class UserBean {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
 	/**
 	 * @return the reEnterPassword
 	 */
@@ -67,6 +72,4 @@ public class UserBean {
 	public void setReEnterPassword(String reEnterPassword) {
 		this.reEnterPassword = reEnterPassword;
 	}
-	
-
 }

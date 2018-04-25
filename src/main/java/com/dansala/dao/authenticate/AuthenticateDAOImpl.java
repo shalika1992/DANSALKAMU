@@ -58,7 +58,7 @@ public class AuthenticateDAOImpl {
 					
 					if(record.get("PASSWORD").equals(loginBean.getPassword())){;
 					UserBean userBean=new UserBean();
-					userBean.setUserId ((int)record.get("USERID"));
+					userBean.setUserId ((long)record.get("USERID"));
 					userBean.setUserName((String)record.get("USERNAME"));
 					userBean.setPassword((String)record.get("PASSWORD"));
 					userBean.setPhoneNumber((String)record.get("PHONENUMBER"));
