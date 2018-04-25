@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
@@ -255,12 +256,7 @@
 	        <label>Select Icon</label>
 	        </div>
 	   		<div class="w3-col l8">
-			<select class="w3-select" name="option">
-			  <option value="" disabled selected>Choose your option</option>
-			  <option value="1">Option 1</option>
-			  <option value="2">Option 2</option>
-			  <option value="3">Option 3</option>
-			</select>
+			<button class="w3-button w3-block" onclick="loadIconList()">Select</button>
 			</div>
 		 </div>
 		 <div class="w3-row">
@@ -283,6 +279,19 @@
 
   
 <!----------------------   END ADD CATEGORY MODEL ------------------------> 
+
+<!----------------------   START SELECT ICON MODEL -----------------------> 
+ <div id="iconModel" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('iconModel').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<div id="icons">
+			</div>
+   	   </div>
+    </div>
+  </div>
+</div>
+<!----------------------   END SELECT ICON MODEL -----------------------> 
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
@@ -316,6 +325,16 @@ function w3_open() {
 function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
+}
+
+function loadIconList(){
+
+	document.getElementById('iconModel').style.display='block';
+	for (i = 0; i <20; i++) { 
+		$( "#icons" ).append( "<p>sdfsdf</p>"  );
+
+	}
+
 }
 </script>
 

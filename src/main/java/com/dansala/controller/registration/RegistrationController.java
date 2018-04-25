@@ -30,14 +30,14 @@ public class RegistrationController {
 	@Autowired
 	UserBeanValidator userBeanValidator;
 	
-	/*@InitBinder
+	@InitBinder
 	protected void dataBinding(WebDataBinder binder) {
 		if(binder.getTarget()!=null && binder.getTarget().getClass().getSimpleName().equals(
 				UserBean.class.getSimpleName())){
 			binder.addValidators(userBeanValidator);
 	   }
 			
-	}*/
+	}
 	
 
 	@RequestMapping(value="/loadRegistrationPage", method=RequestMethod.GET)
