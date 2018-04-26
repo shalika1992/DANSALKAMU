@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.dansala.bean.dansala.DansalaBean;
+import com.dansala.bean.icon.Icon;
 import com.dansala.bean.json.DansalaJSONRespons;
+import com.dansala.bean.json.IconJSONRespons;
 import com.dansala.bean.login.LoginBean;
+import com.dansala.dao.common.CommonDAOImpl;
+import com.dansala.service.common.CommonServiceImpl;
 import com.dansala.service.dansala.DansalaServiceImpl;
 
 @Controller
@@ -19,6 +23,9 @@ public class HomeController {
 
 	@Autowired
 	DansalaServiceImpl dansalaService;
+	
+	@Autowired
+	CommonServiceImpl commonService;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView getHomePage() {
@@ -65,7 +72,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/getAllDansalJSON", method = RequestMethod.POST)
-	public @ResponseBody DansalaJSONRespons getAccountBalance() {
+	public @ResponseBody DansalaJSONRespons getAllDansal() {
 		DansalaJSONRespons dansalaJSONRespons = new DansalaJSONRespons();
 		try {
 
@@ -78,6 +85,22 @@ public class HomeController {
 			dansalaJSONRespons.setMessage("INVALID");
 		}
 		return dansalaJSONRespons;
+
+	}
+	@RequestMapping(value = "/getIconJSON", method = RequestMethod.POST)
+	public @ResponseBody IconJSONRespons getIconJSON() {
+		IconJSONRespons iconJSONRespons = new IconJSONRespons();
+		try {
+
+			List<Icon> list = commonService.getIconList();
+			iconJSONRespons.setIconList(list);
+			iconJSONRespons.setMessage("SUCCESS");
+		}
+
+		catch (Exception e) {
+			iconJSONRespons.setMessage("INVALID");
+		}
+		return iconJSONRespons;
 
 	}
 

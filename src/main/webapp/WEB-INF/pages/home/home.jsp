@@ -251,12 +251,20 @@
       <div class="w3-container">
       <br/>
      	 <div class="w3-row">
-     	  <div class="w3-row">
+     	  <div class="w3-row" id="selectIconDiv">
      	  	<div class="w3-col l4">
 	        <label>Select Icon</label>
 	        </div>
 	   		<div class="w3-col l8">
 			<button class="w3-button w3-block" onclick="loadIconList()">Select</button>
+			</div>
+		 </div>
+		  <div id="selectedIconDiv" class="w3-row" style="display: none">
+     	  	<div class="w3-col s6 m6 l4">
+	        <label>Selected Icon</label>
+	        </div>
+	   		<div class="w3-col s4 m4 l1">
+			<img  id="selectedImg"  />
 			</div>
 		 </div>
 		 <div class="w3-row">
@@ -285,24 +293,8 @@
     <div class="w3-modal-content">
       <div class="w3-container">
         <span onclick="document.getElementById('iconModel').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<div id="icons" class="w3-row">
-				<div  class="w3-col m1 l1 s1"><img id="icon1" src="" style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon2" 
-					 style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon3"  onclick="selectImage('icon3')" style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon4" style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon5" style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon6"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon7"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon8"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon9"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon10"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon11"  style="width:80%" ></div>
-									<div  class="w3-col m1 l1 s1"><img id="icon12"  style="width:80%" ></div>
-					
-					
-				
-			</div>
+        <div id="selectIcon" class="w3-row">
+	    </div>
    	   </div>
     </div>
   </div>
@@ -322,6 +314,8 @@
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
+var iconList;
+var selectedIcon;
 
 // Get the DIV with overlay effect
 var overlayBg = document.getElementById("myOverlay");
@@ -344,24 +338,63 @@ function w3_close() {
 }
 
 function loadIconList(){
-
 	document.getElementById('iconModel').style.display='block';
-	for (i = 1; i <13; i++) { 
-	 
-	$("#icon"+i).attr("src","${pageContext.request.contextPath}/resources/img/logo/logo.png");
-		/* $( "#icons" ).append("<div  class="+'w3-col m1 l1 s1'+"><img src="+'${pageContext.request.contextPath}/resources/img/logo/logo.png'+
-		" style="+'width:10%'+" ></div>");
- */
+    getIconList();
+
+
+}
+//-------------------------------------- START DISPLAY ICON LIST------------------------------------------------//
+function showIconList(){
+	$( "#selectIcon" ).empty();
+	for (i = 0; i <iconList.length; i++) { 
+ 	var url="${pageContext.request.contextPath}/resources/img/icons/"+iconList[i].url+".png";
+	var row="<div id="+'"icons1"'+ "class="+'"w3-row"'+"></div>";
+	var imageDiv="<div  class="+'"w3-col m1 l1 s2"'+ "><img id="+'"icon'+i+'"'+ "onclick="+'"selectImage(this.id)"'+"src='"+url+"'></div>";
+	$("#selectIcon").append(row);
+	$("#icons1").append(imageDiv);
+
 	}
-
 }
-
+//-------------------------------------- END DISPLAY ICON LIST------------------------------------------------//
 function selectImage(selectIconId){
-	var icon=document.getElementById('#'+selectIconId);
-	/* $('#'+selectIconId).attr("src","${pageContext.request.contextPath}/resources/img/welcomePage/a4.png"); */
-	$( '#'+selectIconId ).addClass("w3-opacity-max");
-	alert('#'+selectIconId);
+     var image=document.getElementById('#'+selectIconId);
+	  if(selectedIcon!=null){
+	  	$( '#icon'+selectedIcon ).removeClass("w3-opacity-max");
+	  }
+	  
+	  selectedIcon=selectIconId.slice(4);
+      icon=document.getElementById('#'+selectIconId);
+	  $( '#'+selectIconId ).addClass("w3-opacity-max");
+	  $("#selectedImg").attr("src",$('#'+selectIconId).attr('src'));
+	  $("#selectIconDiv").hide();
+	   $("#selectedIconDiv").show();
+
 }
+
+//-------------------------------------- START GET ICON LIST------------------------------------------------//
+function getIconList(){
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "getIconJSON.json",
+			data:"", 
+			dataType : 'json',
+			timeout : 10000,
+			success : function(data) {
+				if (data.message=="SUCCESS") {
+					iconList=data.iconList;
+					showIconList()		
+				}
+			},
+			error : function(e) {
+			},
+			done : function(x) {
+				console.log("DONE");
+			}
+		});
+
+}
+//-------------------------------------- END GET ICON LIST------------------------------------------------//
 </script>
 
 </body>

@@ -20,7 +20,6 @@ public class CommonServiceImpl {
 	CommonDAOImpl commonDAO;
 	
 	public List<Icon> getIconList(){
-	
 		return commonDAO.getIconList();
 	}
 	
