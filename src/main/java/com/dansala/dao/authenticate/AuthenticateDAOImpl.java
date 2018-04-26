@@ -22,10 +22,16 @@ public class AuthenticateDAOImpl {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,PHONENUMBER, "
+	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER, "
 						+ "RESETLOGIN,FIRSTLOGIN,CHANNEL,VERIFYCODE,STATUSCODE,USERROLECODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
 						+ "FROM USER WHERE USERNAME=?";
-	  
+	
+	/**
+	 * checkUserExists()
+	 * 
+	 * @param  loginBean
+	 * @return UserBean
+	 */
 	public UserBean checkUserExists(LoginBean loginBean) {
 		UserBean userBean = null;
 		try{
@@ -36,7 +42,9 @@ public class AuthenticateDAOImpl {
 						userBean.setUserId((long) record.get("USERID"));
 						userBean.setUserName((String) record.get("USERNAME"));
 						userBean.setPassword((String) record.get("PASSWORD"));
-						userBean.setEmail((String) record.get("PASSWORD"));
+						userBean.setFirstName((String) record.get("FIRSTNAME"));
+						userBean.setLastName((String) record.get("LASTNAME"));
+						userBean.setEmail((String) record.get("EMAIL"));
 						userBean.setPhoneNumber((String) record.get("PHONENUMBER"));
 						userBean.setResetLogin((int) record.get("RESETLOGIN"));
 						userBean.setFirstLogin((int) record.get("FIRSTLOGIN"));

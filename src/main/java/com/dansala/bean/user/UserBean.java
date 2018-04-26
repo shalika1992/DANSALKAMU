@@ -2,6 +2,7 @@ package com.dansala.bean.user;
 import java.util.Date;
 
 public class UserBean {
+	
 	private long userId;
 	private String userName;
 	private String password;
@@ -19,7 +20,10 @@ public class UserBean {
 	private Date lastLoggedDate;
 	private Date lastUpdatedTime;
 	private Date createdTime;
-
+	
+	private String errorCode;// errorCode == 0 SUCCESS , errorCode == 1 FAILED
+	private String message;
+	
 	/**
 	 * @return the userId
 	 */
@@ -239,5 +243,31 @@ public class UserBean {
 	 */
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
-	}		
+	}
+	
+	/**
+	 * @return the errorCode
+	 */
+	public String getErrorCode() {
+		return errorCode;
+	}
+	/**
+	 * @param errorCode the errorCode to set
+	 */
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+	
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}	
 }

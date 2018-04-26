@@ -4,7 +4,11 @@ public class MessageVarList {
 	// --------------------Login Messages start--------------------------------------//
 	public static final String LOGIN_USERNAME_EMPTY="login.username.empty";
 	public static final String LOGIN_PASSWORD_EMPTY="login.password.empty";
+	public static final String LOGIN_USERNAME_INVALID="login.username.invalid";
+	public static final String LOGIN_PASSWORD_INVALID="login.password.invalid";
 	public static final String LOGIN_INVALID_CREDENTIALS= "login.invalid.credentials";
+	
+	public static final String LOGIN_USER_DOESNOT_EXIT="login.user.doesnot.exit";
 	// --------------------Login Messages end---------------------------------------//
 	// --------------------Registration Messages start------------------------------//
 	public static final String REGISTRATION_USERNAME_EMPTY="registration.username.empty";

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.session.SessionBean;
+import com.dansala.bean.user.UserBean;
 import com.dansala.service.authenticate.AuthenticateServiceImpl;
 import com.dansala.util.validator.LoginBeanValidator;
+import com.dansala.util.varlist.CommonVarList;
 import com.dansala.util.varlist.MessageVarList;
 
 
@@ -30,6 +32,9 @@ public class LoginController {
 	
 	@Autowired
 	LoginBeanValidator  loginBeanValidator;
+	
+	@Autowired
+	CommonVarList commonVarList;
 	
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
@@ -70,11 +75,17 @@ public class LoginController {
 				modelAndView = new ModelAndView("login", "command", new LoginBean());
 				modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);
 			}else{
-				String message=authenticateService.checkUserExists(loginBean);
-				if(message.isEmpty()){
+				UserBean userBean=authenticateService.checkUserExists(loginBean,locale);
+				if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_SUCCESS_CODE)){
 					//TODO -> SET VALUES TO SESSION BEAN IN HERE
+					
 					modelAndView = new ModelAndView("redirect:home.html");
-				}else{
+					
+				}else if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_FAIL_CODE)){
+					modelAndView = new ModelAndView("login", "command", new LoginBean());
+					modelMap.put("errorMessage",userBean.getMessage());
+					
+				}else {
 					modelAndView = new ModelAndView("login", "command", new LoginBean());
 					modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);
 				}

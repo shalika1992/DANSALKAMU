@@ -14,4 +14,12 @@ public class CommonVarList {
 	@Autowired
 	@Value("${status.default.deactive}")
 	public String STATUS_DEFAULT_DEACTIVE;
+	
+	@Autowired
+	@Value("${errorcode.success.code}")
+	public String ERRORCODE_SUCCESS_CODE;
+	
+	@Autowired
+	@Value("${errorcode.fail.code}")
+	public String ERRORCODE_FAIL_CODE;
 }

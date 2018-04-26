@@ -77,6 +77,6 @@
 	<!--message source configuration -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="defaultEncoding" value="UTF-8" />
-		<property name="basename" value="prop/locale" />
+		<property name="basename" value="propertyfile/locale" />
 	</bean>
 </beans>  
