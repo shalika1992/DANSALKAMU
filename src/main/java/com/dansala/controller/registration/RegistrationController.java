@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.dansala.bean.register.RegisterUserBean;
-import com.dansala.bean.user.UserBean;
 import com.dansala.service.registration.RegistrationServiceImpl;
 import com.dansala.util.validator.RegisterUserBeanValidator;
 
@@ -31,22 +29,34 @@ public class RegistrationController {
 	public void dataBinding(WebDataBinder binder) {
 		binder.addValidators(userBeanValidator);
 	}
-
-	@RequestMapping(value = "/loadRegistrationPage", method = RequestMethod.GET)
-	public ModelAndView loadRegisterPage() {
+	
+	/**
+	 * getRegister()
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView getRegister() {
 		return new ModelAndView("register", "command", new RegisterUserBean());
 	}
-
-	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-	public ModelAndView registerUser(@ModelAttribute("RegisterUserBean") @Valid RegisterUserBean registerUserBean, BindingResult bindingResult,ModelMap modelMap, Locale locale) {
+	
+	/**
+	 * postRegister()
+	 * @param  registerUserBean
+	 * @param  bindingResult
+	 * @param  modelMap
+	 * @param  locale
+	 * @return ModelAndView
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView postRegister(@ModelAttribute("RegisterUserBean") @Valid RegisterUserBean registerUserBean, BindingResult bindingResult,ModelMap modelMap, Locale locale) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("register", "command", new UserBean());
+			return new ModelAndView("register", "command", new RegisterUserBean());
 		} else {
 			registerUserBean = registrationService.registerUser(registerUserBean);
 			if (registerUserBean != null) {
 				return new ModelAndView("home");
 			} else {
-				return new ModelAndView("register", "command", new UserBean());
+				return new ModelAndView("register", "command", new RegisterUserBean());
 			}
 		}
 	}

@@ -14,6 +14,7 @@ public class UserBean {
 	private String channel;
 	private String verifyCode;
 	private String statusCode;
+	private String userRoleCode;
 	private String lastUpdatedUser;
 	private Date lastLoggedDate;
 	private Date lastUpdatedTime;
@@ -176,6 +177,19 @@ public class UserBean {
 	}
 	
 	/**
+	 * @return the userRoleCode
+	 */
+	public String getUserRoleCode() {
+		return userRoleCode;
+	}
+	/**
+	 * @param userRoleCode the userRoleCode to set
+	 */
+	public void setUserRoleCode(String userRoleCode) {
+		this.userRoleCode = userRoleCode;
+	}
+	
+	/**
 	 * @return the lastUpdatedUser
 	 */
 	public String getLastUpdatedUser() {
@@ -187,6 +201,7 @@ public class UserBean {
 	public void setLastUpdatedUser(String lastUpdatedUser) {
 		this.lastUpdatedUser = lastUpdatedUser;
 	}
+	
 	/**
 	 * @return the lastLoggedDate
 	 */
@@ -199,6 +214,7 @@ public class UserBean {
 	public void setLastLoggedDate(Date lastLoggedDate) {
 		this.lastLoggedDate = lastLoggedDate;
 	}
+	
 	/**
 	 * @return the lastUpdatedTime
 	 */
@@ -211,6 +227,7 @@ public class UserBean {
 	public void setLastUpdatedTime(Date lastUpdatedTime) {
 		this.lastUpdatedTime = lastUpdatedTime;
 	}
+	
 	/**
 	 * @return the createdTime
 	 */
@@ -222,5 +239,5 @@ public class UserBean {
 	 */
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
-	}
+	}		
 }

@@ -27,6 +27,11 @@ public class AuthenticateServiceImpl {
 		String message = "";
 		try {
 			UserBean userBean = authenticateDAO.checkUserExists(loginBean);
+			
+			
+			
+			
+			
 		} catch (Exception e) {
 			logger.error("Exception  :  ", e);
 			throw e;

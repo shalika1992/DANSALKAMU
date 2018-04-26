@@ -107,12 +107,14 @@ CREATE TABLE USER(
 	CHANNEL VARCHAR(8) NOT NULL,
 	VERIFYCODE VARCHAR(16),
 	STATUSCODE VARCHAR(16) NOT NULL,
+	USERROLECODE VARCHAR(16) NOT NULL,
 	LASTUPDATEDUSER VARCHAR(64) NOT NULL,
 	LASTLOGGEDTIME DATETIME  DEFAULT CURRENT_TIMESTAMP,
 	LASTUPDATEDTIME DATETIME  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CREATEDTIME DATETIME  DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (USERID),
-	FOREIGN KEY (STATUSCODE) REFERENCES STATUS(CODE)
+	FOREIGN KEY (STATUSCODE) REFERENCES STATUS(CODE),
+	FOREIGN KEY (USERROLECODE) REFERENCES USERROLE(USERROLECODE)
 )ENGINE=InnoDB;
 
 ALTER TABLE USER AUTO_INCREMENT=5001;
@@ -137,6 +139,14 @@ CREATE TABLE AUDITTRACE(
 
 ALTER TABLE AUDITTRACE AUTO_INCREMENT=1001;
 
+<!--ICON TABLE-->
+CREATE TABLE `dansala`.`icon` (
+  `iconId` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(100) NOT NULL,
+  `flag` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`iconId`)
+ );
+ 
 <!--TOBE EXECUTED-->
 <!--PAGETASK TABLE-->
 CREATE TABLE PAGETASK(
@@ -188,13 +198,21 @@ CREATE TABLE PAGETASKUSERROLE(
 INSERT INTO statuscategory(code,description) values('USER','User Status Category');
 <!-- status table -->
 INSERT INTO status(code,description,category) values('ACT','Active','USER');
+<!-- userroletype table -->
+insert into userroletype(userroletypecode,description,statuscode,lastupdateduser) values
+('WEB','Web User','ACT','admin');
+<!-- userrole table -->
+insert into userrole(userrolecode,description,statuscode,userroletypecode,lastupdateduser) values
+('WEBUSER','Web User','ACT','WEB','admin')
+
+insert into userrole(userrolecode,description,statuscode,userroletypecode,lastupdateduser) values
+('WEBADMIN','Web User','ACT','WEB','admin')
+
 <!-- user table -->
-INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,lastupdateduser) values 
-('supul','supul@123','Supul','Gintota','supul@gmail.com','0712456789','0','0','WEB','1111','ACT','admin');
+INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,userrolecode,lastupdateduser) values 
+('supul','supul@123','Supul','Gintota','supul@gmail.com','0712456789','0','0','WEB','1111','ACT','WEBUSER','admin');
 
+INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,userrolecode,lastupdateduser) values 
+('shalika','shalika@123','Shalika','Weerasinghe','shalika@gmail.com','0712456789','0','0','WEB','1111','ACT','WEBUSER','admin');
 
-CREATE TABLE `dansala`.`icon` (
-  `iconId` INT NOT NULL AUTO_INCREMENT,
-  `url` VARCHAR(100) NOT NULL,
-  `flag` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`iconId`));
+commit;

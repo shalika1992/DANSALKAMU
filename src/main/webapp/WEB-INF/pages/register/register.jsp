@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class=" w3-sand w3-center" style="width: 50%; margin: auto;">
-		<form:form method="POST" class="w3-container  w3-light-grey" action="registerUser.html">
+		<form:form method="POST" class="w3-container  w3-light-grey" action="register.html">
 			<br />
 			<div class="w3-row">
 				<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" style="width: 20%" class="w3-round" alt="Norway">
@@ -18,6 +18,11 @@
 			<br />
 			<div class="w3-row">
 				<form:input placeholder="User Name" class="w3-input w3-border w3-round" path="userName" type="text" />
+				<br />
+			</div>
+			
+			<div class="w3-row">
+				<form:input placeholder="Email" class="w3-input w3-border w3-round" path="email" type="text" />
 				<br />
 			</div>
 			

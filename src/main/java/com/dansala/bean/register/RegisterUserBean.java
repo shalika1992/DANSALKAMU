@@ -3,8 +3,9 @@ package com.dansala.bean.register;
 public class RegisterUserBean {
 	private long userId;
 	private String userName;
-	private String password;
+	private String email;
 	private String phoneNumber;
+	private String password;
 	private String reEnterPassword;
 	
 	/**
@@ -31,6 +32,19 @@ public class RegisterUserBean {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	/**

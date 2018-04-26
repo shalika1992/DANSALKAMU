@@ -72,7 +72,7 @@ public class LoginController {
 			}else{
 				String message=authenticateService.checkUserExists(loginBean);
 				if(message.isEmpty()){
-					//TODO
+					//TODO -> SET VALUES TO SESSION BEAN IN HERE
 					modelAndView = new ModelAndView("redirect:home.html");
 				}else{
 					modelAndView = new ModelAndView("login", "command", new LoginBean());

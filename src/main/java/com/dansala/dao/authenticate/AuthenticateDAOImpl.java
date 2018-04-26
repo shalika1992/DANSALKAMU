@@ -23,7 +23,7 @@ public class AuthenticateDAOImpl {
 	JdbcTemplate jdbcTemplate;
 	
 	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,PHONENUMBER, "
-						+ "RESETLOGIN,FIRSTLOGIN,CHANNEL,VERIFYCODE,STATUSCODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
+						+ "RESETLOGIN,FIRSTLOGIN,CHANNEL,VERIFYCODE,STATUSCODE,USERROLECODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
 						+ "FROM USER WHERE USERNAME=?";
 	  
 	public UserBean checkUserExists(LoginBean loginBean) {
@@ -36,12 +36,14 @@ public class AuthenticateDAOImpl {
 						userBean.setUserId((long) record.get("USERID"));
 						userBean.setUserName((String) record.get("USERNAME"));
 						userBean.setPassword((String) record.get("PASSWORD"));
+						userBean.setEmail((String) record.get("PASSWORD"));
 						userBean.setPhoneNumber((String) record.get("PHONENUMBER"));
 						userBean.setResetLogin((int) record.get("RESETLOGIN"));
 						userBean.setFirstLogin((int) record.get("FIRSTLOGIN"));
 						userBean.setChannel((String) record.get("CHANNEL"));
 						userBean.setVerifyCode((String) record.get("VERIFYCODE"));
 						userBean.setStatusCode((String) record.get("STATUSCODE"));
+						userBean.setUserRoleCode((String) record.get("USERROLECODE"));
 						userBean.setLastUpdatedUser((String) record.get("LASTUPDATEDUSER"));
 						userBean.setLastLoggedDate((Date) record.get("LASTLOGGEDTIME"));
 						userBean.setLastUpdatedTime((Date) record.get("LASTUPDATEDTIME"));
