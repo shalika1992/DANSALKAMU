@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommonVarList {
 	
+	/*-------- Default status codes---------------------------*/
 	@Autowired
 	@Value("${status.default.active}")
 	public String STATUS_DEFAULT_ACTIVE;
@@ -16,10 +17,35 @@ public class CommonVarList {
 	public String STATUS_DEFAULT_DEACTIVE;
 	
 	@Autowired
+	@Value("${status.default.block}")
+	public String STATUS_DEFAULT_BLOCK;
+	
+	/*-------- Default success code | fail codes--------------*/
+	
+	@Autowired
 	@Value("${errorcode.success.code}")
 	public String ERRORCODE_SUCCESS_CODE;
 	
 	@Autowired
 	@Value("${errorcode.fail.code}")
 	public String ERRORCODE_FAIL_CODE;
+	
+	/*-------- Default login codes-----------------------------*/
+	
+	@Autowired
+	@Value("${user.reset.enable}")
+	public String USER_RESET_ENABLE;
+	
+	@Autowired
+	@Value("${user.reset.disable}")
+	public String USER_RESET_DISABLE;
+	
+	
+	@Autowired
+	@Value("${user.firstlogin.enable}")
+	public String USER_FIRSTLOGIN_ENABLE;
+	
+	@Autowired
+	@Value("${user.firstlogin.enable}")
+	public String USER_FIRSTLOGIN_DISABLE;
 }

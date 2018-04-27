@@ -51,13 +51,12 @@ public class AuthenticateServiceImpl {
 			}else{
 				if(PasswordDigest.encodeToBase64(loginBean.getPassword()).equals(userBean.getPassword())){
 					errorcode = commonVarList.ERRORCODE_SUCCESS_CODE;
-					
-					
 					//check first login
 					//check reset login
 					//check active or de-active user
 					//check block user
 					//check idle time period of user
+					//update last logged time
 				}else{
 					message = messageSource.getMessage(MessageVarList.LOGIN_INVALID_CREDENTIALS, null, locale);
 				}

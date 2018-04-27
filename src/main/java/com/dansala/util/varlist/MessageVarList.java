@@ -8,6 +8,7 @@ public class MessageVarList {
 	public static final String LOGIN_PASSWORD_INVALID="login.password.invalid";
 	public static final String LOGIN_INVALID_CREDENTIALS= "login.invalid.credentials";
 	
+	
 	public static final String LOGIN_USER_DOESNOT_EXIT="login.user.doesnot.exit";
 	// --------------------Login Messages end---------------------------------------//
 	// --------------------Registration Messages start------------------------------//

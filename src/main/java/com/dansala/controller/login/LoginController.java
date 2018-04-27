@@ -79,8 +79,32 @@ public class LoginController {
 				if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_SUCCESS_CODE)){
 					//TODO -> SET VALUES TO SESSION BEAN IN HERE
 					
-					modelAndView = new ModelAndView("redirect:home.html");
+					//check first login -ok
+					//check reset login -ok
+					//check active or de-active user
+					//check block user
 					
+					
+					//check idle time period of user
+					//update last logged time
+					
+					if(Integer.parseInt(commonVarList.USER_FIRSTLOGIN_ENABLE)== userBean.getFirstLogin()){
+						modelAndView = new ModelAndView("verifycode");
+						
+					}else if(Integer.parseInt(commonVarList.USER_RESET_ENABLE)== userBean.getResetLogin()){
+						modelAndView = new ModelAndView("changepassword");
+						
+					}else if(commonVarList.STATUS_DEFAULT_DEACTIVE.equals(userBean.getStatusCode())){
+						modelAndView = new ModelAndView("changepassword");
+						
+					}else if(commonVarList.STATUS_DEFAULT_BLOCK.equals(userBean.getStatusCode())){
+						modelAndView = new ModelAndView("login", "command", new LoginBean());
+						modelMap.put("errorMessage",MessageVarList.LOGIN_USER_BLOCKED);
+						
+					}else if(commonVarList.STATUS_DEFAULT_ACTIVE.equals(userBean.getStatusCode())){
+						
+						modelAndView = new ModelAndView("redirect:home.html");
+					}
 				}else if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_FAIL_CODE)){
 					modelAndView = new ModelAndView("login", "command", new LoginBean());
 					modelMap.put("errorMessage",userBean.getMessage());

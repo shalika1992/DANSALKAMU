@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.dansala.bean.icon.Icon;
-import com.dansala.bean.login.LoginBean;
-import com.dansala.bean.user.UserBean;
 
 @Repository
 @Scope("prototype")
@@ -24,8 +21,10 @@ public class CommonDAOImpl {
 	private final Log logger = LogFactory.getLog(getClass());
 	private final String GET_ICONS_SQL="SELECT ICONID,URL,FLAG FROM ICON WHERE FLAG=?";
 	
-
-	
+	/**
+	 * getIconList()
+	 * @return List<Icon>
+	 */
 	public List<Icon> getIconList(){
 		try {
 			List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(GET_ICONS_SQL, 0);
@@ -40,7 +39,6 @@ public class CommonDAOImpl {
 				}
 				return iconList;
 			}
-
 		} catch (Exception e) {
 			logger.error("Exception  :  " , e);
 			throw e;

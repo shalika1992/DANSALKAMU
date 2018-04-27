@@ -145,7 +145,7 @@ CREATE TABLE `dansala`.`icon` (
   `url` VARCHAR(100) NOT NULL,
   `flag` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`iconId`)
- );
+);
 
 <!--dansalcategory TABLE-->
 CREATE TABLE `dansala`.`dansalcategory` (
@@ -158,6 +158,17 @@ CREATE TABLE `dansala`.`dansalcategory` (
  );
     
 ALTER TABLE `dansala`.`dansalcategory` CHANGE COLUMN `categoryId` `categoryId` INT(11) NOT NULL AUTO_INCREMENT ;
+
+!--PWDPARM TABLE-->
+CREATE TABLE PWDPARM (
+	PARAMCODE VARCHAR(16) NOT NULL,
+	DESCRIPTION VARCHAR(64),
+	VALUE VARCHAR(100),
+	CREATEDTIME DATETIME  DEFAULT CURRENT_TIMESTAMP,
+	LASTUPDATEDTIME DATETIME  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	LASTUPDATEDUSER VARCHAR(64) NOT NULL,
+	PRIMARY KEY (PARAMCODE)
+);
 
 <!--TOBE EXECUTED-->
 <!--PAGETASK TABLE-->
@@ -208,11 +219,16 @@ CREATE TABLE PAGETASKUSERROLE(
 
 <!-- statuscategory table -->
 INSERT INTO statuscategory(code,description) values('USER','User Status Category');
+
 <!-- status table -->
 INSERT INTO status(code,description,category) values('ACT','Active','USER');
+INSERT INTO status(code,description,category) values('DCT','De-Active','USER');
+INSERT INTO status(code,description,category) values('BLK','Block','USER');
+
 <!-- userroletype table -->
 insert into userroletype(userroletypecode,description,statuscode,lastupdateduser) values
 ('WEB','Web User','ACT','admin');
+
 <!-- userrole table -->
 insert into userrole(userrolecode,description,statuscode,userroletypecode,lastupdateduser) values
 ('WEBUSER','Web User','ACT','WEB','admin')
@@ -222,9 +238,12 @@ insert into userrole(userrolecode,description,statuscode,userroletypecode,lastup
 
 <!-- user table -->
 INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,userrolecode,lastupdateduser) values 
-('supul','supul@123','Supul','Gintota','supul@gmail.com','0712456789','0','0','WEB','1111','ACT','WEBUSER','admin');
+('supul','c3VwdWxAMTIz','Supul','Gintota','supul@gmail.com','0712456789','0','0','WEB','1111','ACT','WEBUSER','admin');
 
 INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlogin,firstlogin,channel,verifycode,statuscode,userrolecode,lastupdateduser) values 
 ('shalika','shalika@123','Shalika','Weerasinghe','shalika@gmail.com','0712456789','0','0','WEB','1111','ACT','WEBUSER','admin');
+
+<!-- pwdparam table -->
+insert into pwdparam(PARAMCODE,DESCRIPTION,VALUE,LASTUPDATEDUSER) values('ITM','Inactive Time Period','60','admin');
 
 commit;
