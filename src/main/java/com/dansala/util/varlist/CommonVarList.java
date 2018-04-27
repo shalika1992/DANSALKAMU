@@ -40,12 +40,21 @@ public class CommonVarList {
 	@Value("${user.reset.disable}")
 	public String USER_RESET_DISABLE;
 	
-	
 	@Autowired
 	@Value("${user.firstlogin.enable}")
 	public String USER_FIRSTLOGIN_ENABLE;
 	
 	@Autowired
-	@Value("${user.firstlogin.enable}")
+	@Value("${user.firstlogin.disable}")
 	public String USER_FIRSTLOGIN_DISABLE;
+	
+	/*-------- Default user param codes-----------------------------*/
+	
+	@Autowired
+	@Value("${userparam.inactive.paramcode}")
+	public String USERPARAM_INACTIVE_PARAMCODE;
+	
+	@Autowired
+	@Value("${userparam.pincount.paramcode}")
+	public String USERPARAM_PINCOUNT_PARAMCODE;
 }

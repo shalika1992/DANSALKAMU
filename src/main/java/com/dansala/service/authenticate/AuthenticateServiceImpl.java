@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.user.UserBean;
 import com.dansala.dao.authenticate.AuthenticateDAOImpl;
+import com.dansala.service.common.CommonServiceImpl;
 import com.dansala.util.common.Common;
 import com.dansala.util.common.PasswordDigest;
 import com.dansala.util.varlist.CommonVarList;
@@ -20,9 +21,12 @@ import com.dansala.util.varlist.MessageVarList;
 @Scope("prototype")
 public class AuthenticateServiceImpl {
 	private final Log logger = LogFactory.getLog(getClass());
-
+	
 	@Autowired
 	AuthenticateDAOImpl authenticateDAO;
+	
+	@Autowired
+	CommonServiceImpl commonServiceImpl;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -49,16 +53,16 @@ public class AuthenticateServiceImpl {
 			if(userBean == null){
 				message = messageSource.getMessage(MessageVarList.LOGIN_USER_DOESNOT_EXIT, null, locale);
 			}else{
-				if(PasswordDigest.encodeToBase64(loginBean.getPassword()).equals(userBean.getPassword())){
+				String pinCount=commonServiceImpl.getPwdParamValue(commonVarList.USERPARAM_PINCOUNT_PARAMCODE);
+				if(Integer.parseInt(pinCount) <= userBean.getPincount()){
+					authenticateDAO.deActivateUser(loginBean);
+					/*set user to deactivate status code*/
+					userBean.setStatusCode(commonVarList.STATUS_DEFAULT_DEACTIVE);
+				}else if(PasswordDigest.encodeToBase64(loginBean.getPassword()).equals(userBean.getPassword())){
 					errorcode = commonVarList.ERRORCODE_SUCCESS_CODE;
-					//check first login
-					//check reset login
-					//check active or de-active user
-					//check block user
-					//check idle time period of user
-					//update last logged time
 				}else{
 					message = messageSource.getMessage(MessageVarList.LOGIN_INVALID_CREDENTIALS, null, locale);
+					authenticateDAO.updatePinCount(loginBean);
 				}
 			}
 		} catch (Exception e) {

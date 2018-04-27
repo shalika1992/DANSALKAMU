@@ -25,31 +25,49 @@
 		<put-attribute name="footer" value="/WEB-INF/pages/template/footer.jsp" />
 	</definition>
 	
+	<!-- welcome page -->
 	<definition name="welcome" extends="welcomeTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/welcome/welcome.jsp" />
 	</definition>
 	
+	<!-- login page -->
 	<definition name="login" extends="loginTemplate">
 		<put-attribute name="title" value="IBS|Login" />
 		<put-attribute name="body" value="/WEB-INF/pages/login/login.jsp" />
 	</definition>
 	
+	<!-- register page -->
 	<definition name="register" extends="loginTemplate">
 		<put-attribute name="title" value="IBS|Register"/>
 		<put-attribute name="body" value="/WEB-INF/pages/register/register.jsp" />
 	</definition>
 	
+	<!-- verifycode page -->
+	<definition name="verifycode" extends="welcomeTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/user/verifycode.jsp" />
+	</definition>
+	
+	<!-- changepassword page -->
+	<definition name="changepassword" extends="welcomeTemplate">
+		<put-attribute name="title" value="IBS|Home"/>
+		<put-attribute name="body" value="/WEB-INF/pages/welcome/changepassword.jsp" />
+	</definition>
+	
+	<!-- home page -->
 	<definition name="home" extends="baseTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/home/home.jsp" />
 	</definition>
 	
+	<!-- dansala page -->
 	<definition name="dansalaPage" extends="baseTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/dansala/dansala.jsp" />
 	</definition>
 	
+	<!-- map page -->
 	<definition name="map" extends="baseTemplate">
 		<put-attribute name="title" value="IBS|Home"/>
 		<put-attribute name="body" value="/WEB-INF/pages/dansala/map.jsp" />

@@ -23,7 +23,7 @@ public class AuthenticateDAOImpl {
 	JdbcTemplate jdbcTemplate;
 	
 	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER, "
-						+ "RESETLOGIN,FIRSTLOGIN,CHANNEL,VERIFYCODE,STATUSCODE,USERROLECODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
+						+ "RESETLOGIN,FIRSTLOGIN,PINCOUNT,CHANNEL,VERIFYCODE,STATUSCODE,USERROLECODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
 						+ "FROM USER WHERE USERNAME=?";
 	
 	/**
@@ -48,6 +48,7 @@ public class AuthenticateDAOImpl {
 						userBean.setPhoneNumber((String) record.get("PHONENUMBER"));
 						userBean.setResetLogin((int) record.get("RESETLOGIN"));
 						userBean.setFirstLogin((int) record.get("FIRSTLOGIN"));
+						userBean.setPincount((int) record.get("PINCOUNT"));
 						userBean.setChannel((String) record.get("CHANNEL"));
 						userBean.setVerifyCode((String) record.get("VERIFYCODE"));
 						userBean.setStatusCode((String) record.get("STATUSCODE"));
@@ -63,5 +64,15 @@ public class AuthenticateDAOImpl {
 			throw e;
 		}
 		return userBean;
+	}
+
+	public void deActivateUser(LoginBean loginBean) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updatePinCount(LoginBean loginBean) {
+		// TODO Auto-generated method stub
+		
 	}
 }

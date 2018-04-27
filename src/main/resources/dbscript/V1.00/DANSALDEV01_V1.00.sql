@@ -104,6 +104,7 @@ CREATE TABLE USER(
 	PHONENUMBER VARCHAR(16) NOT NULL,
 	RESETLOGIN SMALLINT(1) DEFAULT 0,
 	FIRSTLOGIN SMALLINT(1) DEFAULT 0,
+	PINCOUNT smallint(5) DEFAULT 0,
 	CHANNEL VARCHAR(8) NOT NULL,
 	VERIFYCODE VARCHAR(16),
 	STATUSCODE VARCHAR(16) NOT NULL,
@@ -160,7 +161,7 @@ CREATE TABLE `dansala`.`dansalcategory` (
 ALTER TABLE `dansala`.`dansalcategory` CHANGE COLUMN `categoryId` `categoryId` INT(11) NOT NULL AUTO_INCREMENT ;
 
 !--PWDPARM TABLE-->
-CREATE TABLE PWDPARM (
+CREATE TABLE PWDPARAM (
 	PARAMCODE VARCHAR(16) NOT NULL,
 	DESCRIPTION VARCHAR(64),
 	VALUE VARCHAR(100),
@@ -245,5 +246,6 @@ INSERT INTO user(username,password,firstname,lastname,email,phonenumber,resetlog
 
 <!-- pwdparam table -->
 insert into pwdparam(PARAMCODE,DESCRIPTION,VALUE,LASTUPDATEDUSER) values('ITM','Inactive Time Period','60','admin');
+insert into pwdparam(PARAMCODE,DESCRIPTION,VALUE,LASTUPDATEDUSER) values('PIN','Pin Count','5','admin');
 
 commit;

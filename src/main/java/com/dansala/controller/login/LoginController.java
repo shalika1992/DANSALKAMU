@@ -1,6 +1,5 @@
 package com.dansala.controller.login;
 
-
 import java.util.Locale;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,8 @@ import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.session.SessionBean;
 import com.dansala.bean.user.UserBean;
 import com.dansala.service.authenticate.AuthenticateServiceImpl;
+import com.dansala.service.common.CommonServiceImpl;
+import com.dansala.util.common.Common;
 import com.dansala.util.validator.LoginBeanValidator;
 import com.dansala.util.varlist.CommonVarList;
 import com.dansala.util.varlist.MessageVarList;
@@ -31,10 +32,18 @@ public class LoginController {
 	AuthenticateServiceImpl authenticateService;
 	
 	@Autowired
+	CommonServiceImpl commonServiceImpl;
+	
+	@Autowired
 	LoginBeanValidator  loginBeanValidator;
 	
 	@Autowired
+	Common common;
+	
+	@Autowired
 	CommonVarList commonVarList;
+	
+	
 	
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
@@ -77,17 +86,6 @@ public class LoginController {
 			}else{
 				UserBean userBean=authenticateService.checkUserExists(loginBean,locale);
 				if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_SUCCESS_CODE)){
-					//TODO -> SET VALUES TO SESSION BEAN IN HERE
-					
-					//check first login -ok
-					//check reset login -ok
-					//check active or de-active user
-					//check block user
-					
-					
-					//check idle time period of user
-					//update last logged time
-					
 					if(Integer.parseInt(commonVarList.USER_FIRSTLOGIN_ENABLE)== userBean.getFirstLogin()){
 						modelAndView = new ModelAndView("verifycode");
 						
@@ -102,13 +100,28 @@ public class LoginController {
 						modelMap.put("errorMessage",MessageVarList.LOGIN_USER_BLOCKED);
 						
 					}else if(commonVarList.STATUS_DEFAULT_ACTIVE.equals(userBean.getStatusCode())){
+						String currentDate = commonServiceImpl.getCurrentDate();
+						String inactiveTimePeriod=commonServiceImpl.getPwdParamValue(commonVarList.USERPARAM_INACTIVE_PARAMCODE);
 						
-						modelAndView = new ModelAndView("redirect:home.html");
+						boolean isIdleUser = common.checkIdledUser(currentDate, userBean.getLastLoggedDate(), inactiveTimePeriod);
+						if(isIdleUser){
+							modelAndView = new ModelAndView("changepassword");
+						}else{
+							
+							//set pin count to 0
+							//update last logged date
+							//set session object here
+							
+							
+							modelAndView = new ModelAndView("redirect:home.html");
+						}
+					}else{
+						modelAndView = new ModelAndView("login", "command", new LoginBean());
+						modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);
 					}
 				}else if(userBean.getErrorCode().equals(commonVarList.ERRORCODE_FAIL_CODE)){
 					modelAndView = new ModelAndView("login", "command", new LoginBean());
 					modelMap.put("errorMessage",userBean.getMessage());
-					
 				}else {
 					modelAndView = new ModelAndView("login", "command", new LoginBean());
 					modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);

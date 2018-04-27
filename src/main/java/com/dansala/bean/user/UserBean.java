@@ -12,6 +12,7 @@ public class UserBean {
 	private String phoneNumber;
 	private int resetLogin;
 	private int firstLogin;
+	private int pincount;
 	private String channel;
 	private String verifyCode;
 	private String statusCode;
@@ -139,6 +140,19 @@ public class UserBean {
 	 */
 	public void setFirstLogin(int firstLogin) {
 		this.firstLogin = firstLogin;
+	}
+	
+	/**
+	 * @return the pincount
+	 */
+	public int getPincount() {
+		return pincount;
+	}
+	/**
+	 * @param pincount the pincount to set
+	 */
+	public void setPincount(int pincount) {
+		this.pincount = pincount;
 	}
 	
 	/**
