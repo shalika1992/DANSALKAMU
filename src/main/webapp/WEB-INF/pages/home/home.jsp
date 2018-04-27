@@ -17,6 +17,8 @@
 #main {margin-left: 120px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}} */
+.w3-button {width:150px;}
+.w6-row :empty:before {content:'fill it';visibility:hidden;}
 </style>
 <body >
 
@@ -244,7 +246,7 @@
 	 <div id="addCategory" class="w3-modal">
     <div class="w3-modal-content w3-card-4">
       <header class="w3-container w3-gray"> 
-        <span onclick="document.getElementById('addCategory').style.display='none'" 
+        <span onclick="removeCategoryModel()" 
         class="w3-button w3-display-topright">&times;</span>
         <h4 class="w3-center">Add Category</h4>
       </header>
@@ -272,9 +274,21 @@
 			<label>Add Name</label>
 			</div>
 			<div class="w3-col l8">
-			<input class="w3-input" type="text">
+			<input class="w3-input" type="text" id="categoryName">
 			</div>
-		</div>	
+		</div>
+		<br/>
+		
+		<div class="w3-row w6-row">
+			<div class="w3-col s0 l5 "></div>
+		 	<div class="w3-col s12 l1 w3-center">
+			<button class="w3-button w3-blue-grey" onclick="addNewCategory()">Save</button>
+			</div>
+			<div class="w3-col s12 l1 w3-center">
+			<button class="w3-button w3-blue-grey" onclick="removeCategoryModel()">Cancle</button>
+			</div>
+			<div class="w3-col s0 l5 "></div>
+		</div>		
 
 		</div>
 		 <br/>
@@ -370,6 +384,40 @@ function selectImage(selectIconId){
 	   $("#selectedIconDiv").show();
 
 }
+
+function removeCategoryModel(){
+		$("#selectIconDiv").show();
+	   $("#selectedIconDiv").hide();	
+	document.getElementById('addCategory').style.display='none';
+
+
+}
+
+//---------------------------------------START ADD NEW CATEGORY ------------------------------------------//
+
+    
+    function addNewCategory(){
+        var categoryName=document.getElementById('#categoryName');
+    	var list = {"type": $('#categoryName').val(),"iconId":iconList[selectedIcon].iconId};
+
+       $.ajax({
+            url: 'newCategoryJSON.json',
+            data:list,
+            type: 'POST',
+            success: function(json) {
+                alert(json.successMsg);
+            },
+			error : function(e) {
+				alert("Error"+e.responseText);
+			},
+			done : function(x) {
+				console.log("DONE");
+			}
+        }); 
+    }
+
+
+
 
 //-------------------------------------- START GET ICON LIST------------------------------------------------//
 function getIconList(){

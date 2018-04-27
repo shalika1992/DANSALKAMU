@@ -146,7 +146,19 @@ CREATE TABLE `dansala`.`icon` (
   `flag` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`iconId`)
  );
- 
+
+<!--dansalcategory TABLE-->
+CREATE TABLE `dansala`.`dansalcategory` (
+  `categoryId` INT NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  `iconId` INT NOT NULL,
+  PRIMARY KEY (`categoryId`),
+  INDEX `icon_idx` (`iconId` ASC),
+  CONSTRAINT `icon` FOREIGN KEY (`iconId`) REFERENCES `dansala`.`icon` (`iconId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+ );
+    
+ALTER TABLE `dansala`.`dansalcategory` CHANGE COLUMN `categoryId` `categoryId` INT(11) NOT NULL AUTO_INCREMENT ;
+
 <!--TOBE EXECUTED-->
 <!--PAGETASK TABLE-->
 CREATE TABLE PAGETASK(
