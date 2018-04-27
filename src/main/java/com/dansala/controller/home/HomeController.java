@@ -107,11 +107,12 @@ public class HomeController {
 		
 		try {
 			dansalCategoryService.addNewCategory(dansalCategory);
-			message.setSuccessMsg("success");
+			message.setSuccessMsg("Succesfully added new category");
+			int a=56/0;
 		}
 
 		catch (Exception e) {
-			
+			message.setErrorMsg("Something is wrong");
 		}
 		return message;
 

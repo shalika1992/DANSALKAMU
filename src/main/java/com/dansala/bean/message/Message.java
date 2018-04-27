@@ -4,7 +4,7 @@ public class Message {
 	
 	private String successMsg;
 	private String errorMsg;
-	private String warningMsg;
+	private String warnningMsg;
 	/**
 	 * @return the successMsg
 	 */
@@ -32,14 +32,18 @@ public class Message {
 	/**
 	 * @return the warningMsg
 	 */
-	public String getWarningMsg() {
-		return warningMsg;
+	/**
+	 * @return the warnningMsg
+	 */
+	public String getWarnningMsg() {
+		return warnningMsg;
 	}
 	/**
-	 * @param warningMsg the warningMsg to set
+	 * @param warnningMsg the warnningMsg to set
 	 */
-	public void setWarningMsg(String warningMsg) {
-		this.warningMsg = warningMsg;
+	public void setWarnningMsg(String warnningMsg) {
+		this.warnningMsg = warnningMsg;
 	}
+
 
 }

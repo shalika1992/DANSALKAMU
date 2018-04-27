@@ -17,15 +17,21 @@ public class DansalCategoryDAOImpl {
 	JdbcTemplate jdbcTemplate;
 	
 	private final Log logger = LogFactory.getLog(getClass());
-	private final String addDansalaCategorySql  ="INSERT INTO DANSALCATEGORY(TYPE,ICONID)"
-			+" VALUES(?,?)";
+	private final String addDansalaCategorySql  ="INSERT INTO DANSALCATEGORY(TYPE,ICONID) VALUES(?,?)";
+	private final String updateIconTable="UPDATE ICON SET FLAG=? WHERE ICONID=?";
 	public boolean addNewCategory(DansalCategory  dansalCategory){
 		Object [] parameters = {dansalCategory.getType(),dansalCategory.getIconId()};
 		try {
 			int rows = jdbcTemplate.update(addDansalaCategorySql, parameters);
 
 			if (rows == 1) {
-				return true;
+				rows = jdbcTemplate.update(updateIconTable, 1,dansalCategory.getIconId());
+				if(rows==1){
+					return true;
+				}
+				else{
+					return false;
+				}
 			} else {
 				return false;
 			}

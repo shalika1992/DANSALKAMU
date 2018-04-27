@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <style>
  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
@@ -250,8 +252,15 @@
         class="w3-button w3-display-topright">&times;</span>
         <h4 class="w3-center">Add Category</h4>
       </header>
-      <div class="w3-container">
-      <br/>
+      <div class="w3-container ">
+      	 <div class="w3-row w6-row">
+      	 <div class="w3-col s3 m3 l3"></div>
+      	  <div class="w3-col s6 m6 l6">
+         <div class="w3-panel w3-center  " id="msg_addcategory" style="diplay:none">
+         </div>
+         </div>
+         <div class="w3-col s3 m3 l3"></div>
+         </div>
      	 <div class="w3-row">
      	  <div class="w3-row" id="selectIconDiv">
      	  	<div class="w3-col l4">
@@ -261,14 +270,16 @@
 			<button class="w3-button w3-block" onclick="loadIconList()">Select</button>
 			</div>
 		 </div>
-		  <div id="selectedIconDiv" class="w3-row" style="display: none">
-     	  	<div class="w3-col s6 m6 l4">
-	        <label>Selected Icon</label>
+		  <div id="selectedIconDiv" class="w3-row w6-row" style="display: none">
+		  	<div class="w3-col s3 m3 l5"></div>
+     	  	<div class="w3-col s6 m6 l2 w3-center w3-light-grey" >
+		        <p class="small_title">Selected Icon</p>
+		        <img  id="selectedImg"  />
 	        </div>
-	   		<div class="w3-col s4 m4 l1">
-			<img  id="selectedImg"  />
-			</div>
+	   		<div class="w3-col s3 m3 l5"></div>
+	
 		 </div>
+		<br/>
 		 <div class="w3-row">
 		 	<div class="w3-col l4">
 			<label>Add Name</label>
@@ -381,14 +392,18 @@ function selectImage(selectIconId){
 	  $( '#'+selectIconId ).addClass("w3-opacity-max");
 	  $("#selectedImg").attr("src",$('#'+selectIconId).attr('src'));
 	  $("#selectIconDiv").hide();
-	   $("#selectedIconDiv").show();
+	  $("#selectedIconDiv").show();
+	  $("#iconModel").hide();
+
 
 }
 
 function removeCategoryModel(){
-		$("#selectIconDiv").show();
-	   $("#selectedIconDiv").hide();	
-	document.getElementById('addCategory').style.display='none';
+	  $('#categoryName').val("");
+	  $('#msg_addcategory').hide();
+	  $("#selectIconDiv").show();
+	  $("#selectedIconDiv").hide();	
+	  document.getElementById('addCategory').style.display='none';
 
 
 }
@@ -405,7 +420,22 @@ function removeCategoryModel(){
             data:list,
             type: 'POST',
             success: function(json) {
-                alert(json.successMsg);
+            	$('#msg_addcategory').empty();
+            	if(json.successMsg!=null){           	
+            		$('#msg_addcategory').append(json.successMsg);
+            		$('#msg_addcategory').addClass('w3-pale-green ');
+            		
+            	}
+            	else if(json.errorMsg!=null){
+            		$('#msg_addcategory').append(json.errorMsg);
+            		$('#msg_addcategory').addClass('w3-pale-red');
+            	}
+            	else if(json.warnningMsg!=null){
+            		$('#msg_addcategory').append(json.warnningMsg);
+            		$('#msg_addcategory').addClass('w3-pale-yellow');
+            	}
+            
+               $('#msg_addcategory').show();      
             },
 			error : function(e) {
 				alert("Error"+e.responseText);
