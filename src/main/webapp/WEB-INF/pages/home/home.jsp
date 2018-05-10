@@ -130,78 +130,10 @@
   </div>
   <hr>
 
-  <div class="w3-container">
-    <h5>Countries</h5>
-    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-      <tr>
-        <td>United States</td>
-        <td>65%</td>
-      </tr>
-      <tr>
-        <td>UK</td>
-        <td>15.7%</td>
-      </tr>
-      <tr>
-        <td>Russia</td>
-        <td>5.6%</td>
-      </tr>
-      <tr>
-        <td>Spain</td>
-        <td>2.1%</td>
-      </tr>
-      <tr>
-        <td>India</td>
-        <td>1.9%</td>
-      </tr>
-      <tr>
-        <td>France</td>
-        <td>1.5%</td>
-      </tr>
-    </table><br>
-    <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
-  </div>
-  <hr>
-  <div class="w3-container">
-    <h5>Recent Users</h5>
-    <ul class="w3-ul w3-card-4 w3-white">
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar2.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Mike</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar5.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jill</span><br>
-      </li>
-      <li class="w3-padding-16">
-        <img src="/w3images/avatar6.png" class="w3-left w3-circle w3-margin-right" style="width:35px">
-        <span class="w3-xlarge">Jane</span><br>
-      </li>
-    </ul>
-  </div>
-  <hr>
 
-  <div class="w3-container">
-    <h5>Recent Comments</h5>
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar3.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12 PM</span></h4>
-        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
 
-    <div class="w3-row">
-      <div class="w3-col m2 text-center">
-        <img class="w3-circle" src="/w3images/avatar1.png" style="width:96px;height:96px">
-      </div>
-      <div class="w3-col m10 w3-container">
-        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span></h4>
-        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
-      </div>
-    </div>
-  </div>
+
+
   <br>
   <div class="w3-container w3-dark-grey w3-padding-32">
     <div class="w3-row">
@@ -308,7 +240,39 @@
     </div>
   </div>
 </div>
-<!----------------------   END SELECT ICON MODEL -----------------------> 
+<!----------------------   END SELECT ICON MODEL -------------------------> 
+
+<!----------------------   START SELECT ICON MODEL -----------------------> 
+  <div id="deleteCategoryModel" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-gray"> 
+        <span onclick="document.getElementById('deleteCategoryModel').style.display='none'" 
+        class="w3-button w3-large w3-display-topright">&times;</span>
+        <h4 class="w3-center">Delete Category</h4>
+      </header>
+      <div class="w3-container w3-center">
+        <br/>
+        	 <div class="w3-panel " id="msg_deletecategory" style="diplay:none"></div>
+        	<div id="dansalCategoryName" ></div>
+        	<div id="dansalCategoryIcon" ></div>
+        <br/>
+        <div class="w3-row w6-row">
+			<div class="w3-col s0 l5 "></div>
+		 	<div class="w3-col s12 l1 " id="deleteBtnInCategory">
+			
+			</div>
+			<div class="w3-col s12 l1 ">
+			<button class="w3-button w3-blue-grey"  onclick="document.getElementById('deleteCategoryModel').style.display='none'">Cancle</button>
+			</div>
+			<div class="w3-col s0 l5 "></div>
+		</div>		
+        	<br/>
+      </div>
+
+    </div>
+  </div>
+
+<!----------------------   END SELECT ICON MODEL -------------------------> 
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-16 w3-light-grey">
@@ -326,6 +290,7 @@
 var mySidebar = document.getElementById("mySidebar");
 var iconList;
 var selectedIcon;
+var categoryList;
 getDansalCategoryList();
 
 // Get the DIV with overlay effect
@@ -472,7 +437,9 @@ function getDansalCategoryList(){
 			timeout : 10000,
 			success : function(data) {
 				if (data.message=="SUCCESS") {
-					addDataForDansalCategoryTable(data.dansalCategoryList);			
+					categoryList=data.dansalCategoryList;
+					addDataForDansalCategoryTable(categoryList);
+								
 				}
 			},
 			error : function(e) {
@@ -487,10 +454,10 @@ function getDansalCategoryList(){
 
 function addDataForDansalCategoryTable(dansalCategoryList){
 		$( "#dansalCategoryTableTBody" ).empty();
-		for (i = 0; i <dansalCategoryList.length; i++) { 	
+		for (i = 0; i <dansalCategoryList.length; i++) { 
 		 	var url="${pageContext.request.contextPath}/resources/img/icons/"+dansalCategoryList[i].url+".png";
 			var imageDiv="<img style='width:13%' id="+'"icon'+i+'"'+"src='"+url+"'>";
-			var deleteIcon="<img style='width:15%' "+  "onclick="+'"deleteCategory('+dansalCategoryList[i]+')"'+" src='${pageContext.request.contextPath}/resources/img/common/delete.png'>";
+			var deleteIcon="<img style='width:15%' "+  "onclick="+'"showDeleteCategoryModel('+i+')"'+" src='${pageContext.request.contextPath}/resources/img/common/delete.png'>";
 			var updateIcon="<img style='width:15%' "+  "onclick="+'"updateCategory()"'+" src='${pageContext.request.contextPath}/resources/img/common/update.png'>";
 		 	var row=" <tr> <td> "+(i+1)+" </td> <td>"+imageDiv +"</td>   <td>"+dansalCategoryList[i].type+"</td>  <td>" +deleteIcon+" " +updateIcon+"</td>    </tr>"; 
 	     $("#dansalCategoryTableTBody").append(row);
@@ -499,8 +466,50 @@ function addDataForDansalCategoryTable(dansalCategoryList){
 }
 
 
-function deleteCategory(id){
-		alert(id);
+function showDeleteCategoryModel(categoryId){
+	$('#msg_deletecategory').empty();
+	$('#dansalCategoryName').empty();
+	$('#dansalCategoryIcon').empty();
+	$('#deleteBtnInCategory').empty();
+	var url="${pageContext.request.contextPath}/resources/img/icons/"+categoryList[categoryId].url+".png";
+    var icon="<img "+"src='"+url+"'>";
+	$('#dansalCategoryName').append(categoryList[categoryId].type);
+	$('#dansalCategoryIcon').append(icon);
+	$('#deleteBtnInCategory').append('<button class="w3-button w3-blue-grey" onclick="deleteCategory('+categoryId+')"'+'>Delete</button>');
+	document.getElementById('deleteCategoryModel').style.display='block';
+
+}
+
+function deleteCategory(categoryId){
+	$('#msg_deletecategory').empty();
+	 $.ajax({
+            url: 'deleteDansalCategoryJSON.json',
+            data:{'categoryId':categoryList[categoryId].categoryId,'iconId':categoryList[categoryId].iconId},
+            type: 'POST',
+            success: function(json) {
+            	
+            	if(json.successMsg!=null){
+            		$('#msg_deletecategory').append(json.successMsg);
+            		$('#msg_deletecategory').addClass('w3-pale-green');           	
+            		getDansalCategoryList();
+            		
+            	}
+            	else if(json.errorMsg!=null){
+            	$('#msg_deletecategory').append(json.errorMsg);
+            		$('#msg_deletecategory').addClass('w3-pale-red'); 
+            		
+            	}
+            
+               
+            },
+			error : function(e) {
+				alert("Error"+e.responseText);
+			},
+			done : function(x) {
+				
+			}
+        }); 
+
 }
 
 function updateCategory(){
@@ -516,7 +525,7 @@ $(document).ready(function() {
        "paging":   false,
        "ordering": false,
        "info":     false,
-       "search":false
+       "searching":false
     } );
 } );
 </script>

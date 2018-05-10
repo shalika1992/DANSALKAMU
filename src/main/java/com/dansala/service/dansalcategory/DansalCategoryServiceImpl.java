@@ -25,5 +25,9 @@ public class DansalCategoryServiceImpl {
 	public  List<DansalCategoryDTO> getAllDansal(){
 		return dansalaCategoryDAO.getAllDansalCategory();
 	}
+	
+	public boolean deleteCategory(int categoryId, int iconId){
+		return dansalaCategoryDAO.deleteCategory(categoryId, iconId);
+	}
 
 }

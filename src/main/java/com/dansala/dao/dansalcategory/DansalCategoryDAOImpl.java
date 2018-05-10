@@ -27,13 +27,13 @@ public class DansalCategoryDAOImpl {
 	private final String updateIconTable="UPDATE ICON SET FLAG=? WHERE ICONID=?";
 	private final String getAllDansalSql="SELECT DC.CATEGORYID AS CATEGORYID ,DC.TYPE AS TYPE,DC.ICONID AS ICONID,ICON.URL AS URL FROM DANSALCATEGORY DC INNER JOIN "
 						+" ICON ON DC.ICONID=ICON.ICONID";
+	private final String deleteCategorySql="DELETE FROM  DANSALCATEGORY WHERE CATEGORYID =? ";
 										
 	public boolean addNewCategory(DansalCategory  dansalCategory){
 		Object [] parameters = {dansalCategory.getType(),dansalCategory.getIconId()};
 		List<DansalCategoryDTO> dansalcategoryDTOList=getAllDansalCategory();
 		try {
 			int rows = jdbcTemplate.update(addDansalaCategorySql, parameters);
-
 			if (rows == 1) {
 				rows = jdbcTemplate.update(updateIconTable, 1,dansalCategory.getIconId());
 				if(rows==1){
@@ -49,27 +49,21 @@ public class DansalCategoryDAOImpl {
 			logger.error("Exception  :  " , e);
 			throw e;
 		}
-		
-
 	}
 	
 	
 	public List<DansalCategoryDTO> getAllDansalCategory(){
 		List<DansalCategoryDTO> dansalcategoryDTOList=new ArrayList<DansalCategoryDTO>();
 		try{
-			
 			List<Map<String, Object>> resultSet=jdbcTemplate.queryForList(getAllDansalSql,new Object[] {});
-			
 			if(!resultSet.isEmpty()){
 				for(Map<String,Object> record : resultSet){
-					DansalCategoryDTO dansalaCategoryDTO=new DansalCategoryDTO();
-					
+					DansalCategoryDTO dansalaCategoryDTO=new DansalCategoryDTO();		
 					dansalaCategoryDTO.setCategoryId((int)record.get("CATEGORYID"));
 					dansalaCategoryDTO.setType((String)record.get("TYPE"));
 					dansalaCategoryDTO.setIconId((int)record.get("ICONID"));
 					dansalaCategoryDTO.setUrl((String)record.get("URL"));
 					dansalcategoryDTOList.add(dansalaCategoryDTO);
-
 				}
 			}
 		}catch(Exception e){
@@ -77,6 +71,31 @@ public class DansalCategoryDAOImpl {
 			throw e;
 		}
 		return dansalcategoryDTOList;
+		
+	}
+	
+	public boolean deleteCategory(int categoryId,int iconId){
+		try{
+			int rows = jdbcTemplate.update(deleteCategorySql, categoryId);
+			if(rows==1){
+				rows = jdbcTemplate.update(updateIconTable,0, iconId);
+				if(rows==1){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				return false;
+			}
+			
+		}
+		
+		catch(Exception e){
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
 		
 	}
 }
