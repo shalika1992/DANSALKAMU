@@ -43,8 +43,7 @@ public class LoginController {
 	@Autowired
 	CommonVarList commonVarList;
 	
-	
-	
+
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
 		binder.addValidators(loginBeanValidator);
@@ -79,6 +78,7 @@ public class LoginController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView postLoginPage(@ModelAttribute("LoginBean") @Valid LoginBean loginBean ,BindingResult bindingResult,ModelMap modelMap,Locale locale){
 		ModelAndView modelAndView;
+		boolean isUpdateLastLogin = false;
 		try{
 			if (bindingResult.hasErrors()){
 				modelAndView = new ModelAndView("login", "command", new LoginBean());
@@ -89,15 +89,14 @@ public class LoginController {
 					if(Integer.parseInt(commonVarList.USER_FIRSTLOGIN_ENABLE)== userBean.getFirstLogin()){
 						modelAndView = new ModelAndView("verifycode");
 						
-					}else if(Integer.parseInt(commonVarList.USER_RESET_ENABLE)== userBean.getResetLogin()){
+					}else if(Integer.parseInt(commonVarList.USER_RESET_ENABLE)== userBean.getResetLogin() || commonVarList.STATUS_DEFAULT_DEACTIVE.equals(userBean.getStatusCode())){
 						modelAndView = new ModelAndView("changepassword");
-						
-					}else if(commonVarList.STATUS_DEFAULT_DEACTIVE.equals(userBean.getStatusCode())){
-						modelAndView = new ModelAndView("changepassword");
+						isUpdateLastLogin=true;
 						
 					}else if(commonVarList.STATUS_DEFAULT_BLOCK.equals(userBean.getStatusCode())){
 						modelAndView = new ModelAndView("login", "command", new LoginBean());
 						modelMap.put("errorMessage",MessageVarList.LOGIN_USER_BLOCKED);
+						isUpdateLastLogin=true;
 						
 					}else if(commonVarList.STATUS_DEFAULT_ACTIVE.equals(userBean.getStatusCode())){
 						String currentDate = commonServiceImpl.getCurrentDate();
@@ -107,14 +106,9 @@ public class LoginController {
 						if(isIdleUser){
 							modelAndView = new ModelAndView("changepassword");
 						}else{
-							
-							//set pin count to 0
-							//update last logged date
-							//set session object here
-							
-							
 							modelAndView = new ModelAndView("redirect:home.html");
 						}
+						isUpdateLastLogin=true;
 					}else{
 						modelAndView = new ModelAndView("login", "command", new LoginBean());
 						modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);
@@ -126,6 +120,10 @@ public class LoginController {
 					modelAndView = new ModelAndView("login", "command", new LoginBean());
 					modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);
 				}
+			}
+			
+			if(isUpdateLastLogin){
+				authenticateService.updateLoggedUser(loginBean);
 			}
 		}catch(Exception e){
 			modelAndView= new ModelAndView("login", "command", new LoginBean());

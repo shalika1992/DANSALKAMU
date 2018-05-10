@@ -55,14 +55,15 @@ public class AuthenticateServiceImpl {
 			}else{
 				String pinCount=commonServiceImpl.getPwdParamValue(commonVarList.USERPARAM_PINCOUNT_PARAMCODE);
 				if(Integer.parseInt(pinCount) <= userBean.getPincount()){
-					authenticateDAO.deActivateUser(loginBean);
+					this.deActivateUser(loginBean);
 					/*set user to deactivate status code*/
 					userBean.setStatusCode(commonVarList.STATUS_DEFAULT_DEACTIVE);
 				}else if(PasswordDigest.encodeToBase64(loginBean.getPassword()).equals(userBean.getPassword())){
 					errorcode = commonVarList.ERRORCODE_SUCCESS_CODE;
 				}else{
+					int pincount = userBean.getPincount()+1;
+					this.updatePinCount(loginBean,pincount);
 					message = messageSource.getMessage(MessageVarList.LOGIN_INVALID_CREDENTIALS, null, locale);
-					authenticateDAO.updatePinCount(loginBean);
 				}
 			}
 		} catch (Exception e) {
@@ -72,5 +73,54 @@ public class AuthenticateServiceImpl {
 		userBean.setErrorCode(errorcode);
 		userBean.setMessage(message);
 		return userBean;
+	}
+	
+	/**
+	 * deActivateUser()
+	 * @param  loginBean
+	 * @return boolean
+	 */
+	public boolean deActivateUser(LoginBean loginBean) {
+		boolean isUpdateOk;
+		try{
+			isUpdateOk = authenticateDAO.deActivateUser(loginBean);
+		}catch (Exception e) {
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
+	}
+	
+	/**
+	 * updatePinCount()
+	 * @param  loginBean
+	 * @param  pincount
+	 * @return boolean
+	 */
+	public boolean updatePinCount(LoginBean loginBean, int pincount) {
+		boolean isUpdateOk;
+		try{
+			isUpdateOk = authenticateDAO.updatePinCount(loginBean,pincount);
+		}catch (Exception e) {
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
+	}
+	
+	/**
+	 * updateLoggedUser()
+	 * @param loginBean
+	 * @throws Exception 
+	 */
+	public boolean updateLoggedUser(LoginBean loginBean) throws Exception {
+		boolean isUpdateOk;
+		try{
+			isUpdateOk = authenticateDAO.updateLoggedUser(loginBean);
+		}catch (Exception e) {
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
 	}
 }

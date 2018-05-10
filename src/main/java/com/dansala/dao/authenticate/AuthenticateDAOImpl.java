@@ -1,5 +1,7 @@
 package com.dansala.dao.authenticate;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.user.UserBean;
+import com.dansala.service.common.CommonServiceImpl;
+import com.dansala.util.varlist.CommonVarList;
 
 @Repository
 @Scope("prototype")
@@ -22,9 +27,21 @@ public class AuthenticateDAOImpl {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	private final String SQL_GETUSER_DETAILS_USERNAME = "SELECT USERID,USERNAME,PASSWORD,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER, "
+	@Autowired
+	CommonServiceImpl commonServiceImpl;
+	
+	@Autowired
+	CommonVarList commonVarList;
+	
+	private final String SQL_GETUSER_WITHUSERNAME = "SELECT USERID,USERNAME,PASSWORD,FIRSTNAME,LASTNAME,EMAIL,PHONENUMBER, "
 						+ "RESETLOGIN,FIRSTLOGIN,PINCOUNT,CHANNEL,VERIFYCODE,STATUSCODE,USERROLECODE,LASTUPDATEDUSER,LASTLOGGEDTIME,LASTUPDATEDTIME,CREATEDTIME "
 						+ "FROM USER WHERE USERNAME=?";
+	
+	private final String SQL_UPDATEPINCOUNT_WITHUSERNAME="UPDATE USER SET PINCOUNT=? WHERE USERNAME=?";
+	
+	private final String SQL_UPDATESTATUSCODE_WITHUSERNAME="UPDATE USER SET STATUSCODE=? WHERE USERNAME=?";
+	
+	private final String SQL_UPDATEUSER_WITHUSERNAME="UPDATE USER SET PINCOUNT=? ,LASTLOGGEDTIME=? WHERE USERNAME=?";
 	
 	/**
 	 * checkUserExists()
@@ -35,7 +52,7 @@ public class AuthenticateDAOImpl {
 	public UserBean checkUserExists(LoginBean loginBean) {
 		UserBean userBean = null;
 		try{
-			List<Map<String, Object>> map = jdbcTemplate.queryForList(SQL_GETUSER_DETAILS_USERNAME, new Object[]{loginBean.getUserName()});
+			List<Map<String, Object>> map = jdbcTemplate.queryForList(SQL_GETUSER_WITHUSERNAME, new Object[]{loginBean.getUserName()});
 			if(!map.isEmpty()){
 				for (Map<String, Object> record : map) {
 						userBean = new UserBean();
@@ -65,14 +82,70 @@ public class AuthenticateDAOImpl {
 		}
 		return userBean;
 	}
-
-	public void deActivateUser(LoginBean loginBean) {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * updatePinCount()
+	 * @param  loginBean
+	 * @return boolean
+	 */
+	@Transactional
+	public boolean updatePinCount(LoginBean loginBean,int pincount) {
+		boolean isUpdateOk = false;
+		try{
+			int value = jdbcTemplate.update(SQL_UPDATEPINCOUNT_WITHUSERNAME,new Object[] {pincount,loginBean.getUserName()});
+			if(value == 1){
+				isUpdateOk = true;
+			}
+		}catch(Exception e){
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
 	}
-
-	public void updatePinCount(LoginBean loginBean) {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * deActivateUser()
+	 * @param  loginBean
+	 * @return boolean
+	 */
+	@Transactional
+	public boolean deActivateUser(LoginBean loginBean) {
+		boolean isUpdateOk = false;
+		try{
+			int value = jdbcTemplate.update(SQL_UPDATESTATUSCODE_WITHUSERNAME,new Object[] { commonVarList.STATUS_DEFAULT_DEACTIVE,loginBean.getUserName()});
+			if(value == 1){
+				isUpdateOk = true;
+			}
+		}catch(Exception e){
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
+	}
+	
+	/**
+	 * updateLoggedUser()
+	 * @param  loginBean
+	 * @return boolean
+	 * @throws Exception 
+	 */
+	public boolean updateLoggedUser(LoginBean loginBean) throws Exception {
+		boolean isUpdateOk = false;
+		DateFormat simpleDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		try{
+			String currentDateString=commonServiceImpl.getCurrentDate();
+			Date currentDate = simpleDateFormatter.parse(currentDateString);
+			
+			System.out.println("currentDate ----------------------:"+currentDate);
+			
+			int value = jdbcTemplate.update(SQL_UPDATEUSER_WITHUSERNAME,new Object[] { commonVarList.USER_DEFAULT_PINCOUNT,currentDate,loginBean.getUserName()});
+			if(value == 1){
+				isUpdateOk = true;
+			}
+		}catch(Exception e){
+			logger.error("Exception  :  ", e);
+			throw e;
+		}
+		return isUpdateOk;
 	}
 }

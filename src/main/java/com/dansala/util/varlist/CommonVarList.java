@@ -57,4 +57,10 @@ public class CommonVarList {
 	@Autowired
 	@Value("${userparam.pincount.paramcode}")
 	public String USERPARAM_PINCOUNT_PARAMCODE;
+	
+	/*-------- Default user codes-----------------------------------*/
+	
+	@Autowired
+	@Value("${user.default.pincount}")
+	public String USER_DEFAULT_PINCOUNT;
 }
