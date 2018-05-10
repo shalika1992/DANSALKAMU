@@ -1,6 +1,7 @@
 package com.dansala.controller.login;
 
 import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +77,7 @@ public class LoginController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView postLoginPage(@ModelAttribute("LoginBean") @Valid LoginBean loginBean ,BindingResult bindingResult,ModelMap modelMap,Locale locale){
+	public ModelAndView postLoginPage(@ModelAttribute("LoginBean") @Valid LoginBean loginBean ,BindingResult bindingResult,ModelMap modelMap,HttpServletRequest request,Locale locale){
 		ModelAndView modelAndView;
 		boolean isUpdateLastLogin = false;
 		try{
@@ -106,9 +107,16 @@ public class LoginController {
 						if(isIdleUser){
 							modelAndView = new ModelAndView("changepassword");
 						}else{
+							/*set sessionId to SessionBean*/
+							sessionBean.setSessionId(request.getSession().getId());
+							/*set userid to SesionBean*/
+							sessionBean.setUserId(userBean.getUserId()+"");
+							/*set userbean to sessionBean*/
+							sessionBean.setUserBean(userBean);
+							
 							modelAndView = new ModelAndView("redirect:home.html");
+							isUpdateLastLogin=true;
 						}
-						isUpdateLastLogin=true;
 					}else{
 						modelAndView = new ModelAndView("login", "command", new LoginBean());
 						modelMap.put("errorMessage",MessageVarList.LOGIN_INVALID_CREDENTIALS);

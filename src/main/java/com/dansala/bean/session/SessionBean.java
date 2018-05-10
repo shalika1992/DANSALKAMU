@@ -3,6 +3,8 @@ package com.dansala.bean.session;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.dansala.bean.user.UserBean;
+
 @Component
 @Scope("session")
 public class SessionBean {
@@ -10,6 +12,7 @@ public class SessionBean {
 	private String cif;
 	private String userId;
 	private String userName;
+	private UserBean userBean;
 	
 	public String getSessionId() {
 		return sessionId;
@@ -38,5 +41,11 @@ public class SessionBean {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
+	public UserBean getUserBean() {
+		return userBean;
+	}
+	public void setUserBean(UserBean userBean) {
+		this.userBean = userBean;
+	}
 }
