@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.dansala.bean.dansala.DansalaBean;
 import com.dansala.bean.dansalcategory.DansalCategory;
+import com.dansala.bean.dansalcategory.DansalCategoryDTO;
 import com.dansala.bean.icon.Icon;
+import com.dansala.bean.json.DansalCategoryJSONRepons;
 import com.dansala.bean.json.DansalaJSONRespons;
 import com.dansala.bean.json.IconJSONRespons;
 import com.dansala.bean.login.LoginBean;
 import com.dansala.bean.message.Message;
+import com.dansala.controller.dansala.DansalaController;
 import com.dansala.dao.common.CommonDAOImpl;
 import com.dansala.service.common.CommonServiceImpl;
 import com.dansala.service.dansala.DansalaServiceImpl;
@@ -115,6 +118,24 @@ public class HomeController {
 			message.setErrorMsg("Something is wrong");
 		}
 		return message;
+
+	}
+	
+
+	@RequestMapping(value = "/getAllDansalCategoryJSON", method = RequestMethod.POST)
+	public @ResponseBody DansalCategoryJSONRepons getAllDansalCategory() {
+		DansalCategoryJSONRepons dansalaCategoryJSONRespons = new DansalCategoryJSONRepons();
+		try {
+
+			List<DansalCategoryDTO> list = dansalCategoryService.getAllDansal();
+			dansalaCategoryJSONRespons.setDansalCategoryList(list);
+			dansalaCategoryJSONRespons.setMessage("SUCCESS");
+		}
+
+		catch (Exception e) {
+			dansalaCategoryJSONRespons.setMessage("INVALID");
+		}
+		return dansalaCategoryJSONRespons;
 
 	}
 

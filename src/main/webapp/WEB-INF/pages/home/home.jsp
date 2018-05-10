@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>	
+<script src="https://cdn.datatables.net/fixedcolumns/3.2.4/js/dataTables.fixedColumns.min.js"></script>
 
 <style>
  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -85,44 +89,24 @@
         <img src="/w3images/region.jpg" style="width:100%" alt="Google Regional Map">
       </div>
       <div class="w3-twothird">
-        <h5>Feeds</h5>
-        <table class="w3-table w3-striped w3-white">
-          <tr>
-            <td><i class="fa fa-user w3-text-blue w3-large"></i></td>
-            <td>New record, over 90 views.</td>
-            <td><i>10 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-bell w3-text-red w3-large"></i></td>
-            <td>Database error.</td>
-            <td><i>15 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-users w3-text-yellow w3-large"></i></td>
-            <td>New record, over 40 users.</td>
-            <td><i>17 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-comment w3-text-red w3-large"></i></td>
-            <td>New comments.</td>
-            <td><i>25 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-bookmark w3-text-blue w3-large"></i></td>
-            <td>Check transactions.</td>
-            <td><i>28 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-laptop w3-text-red w3-large"></i></td>
-            <td>CPU overload.</td>
-            <td><i>35 mins</i></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-share-alt w3-text-green w3-large"></i></td>
-            <td>New shares.</td>
-            <td><i>39 mins</i></td>
-          </tr>
+        <h5>Category</h5>
+        
+    <!-----------------------------------    START DANSAL CATEGORY TABEL ------------------------------------>
+        <table class="w3-table w3-striped w3-white display" id="dansalCategoryTable"  style="width:100%">
+    		  <thead>
+            <tr>
+                <th>ID</th>
+                <th>ICON</th>
+                <th>NAME</th> 
+                <th>EDIT</th>  
+            </tr>
+        </thead>
+          <tbody id="dansalCategoryTableTBody">
+          </tbody>
+
+    
         </table>
+    <!-----------------------------------    END DANSAL CATEGORY TABEL ------------------------------------>
       </div>
     </div>
   </div>
@@ -333,6 +317,7 @@
   </footer>
 
   <!-- End page content -->
+
 </div>
 
 
@@ -341,6 +326,7 @@
 var mySidebar = document.getElementById("mySidebar");
 var iconList;
 var selectedIcon;
+getDansalCategoryList();
 
 // Get the DIV with overlay effect
 var overlayBg = document.getElementById("myOverlay");
@@ -424,6 +410,7 @@ function removeCategoryModel(){
             	if(json.successMsg!=null){           	
             		$('#msg_addcategory').append(json.successMsg);
             		$('#msg_addcategory').addClass('w3-pale-green ');
+            		getDansalCategoryList();
             		
             	}
             	else if(json.errorMsg!=null){
@@ -446,7 +433,7 @@ function removeCategoryModel(){
         }); 
     }
 
-
+//-------------------------------------- END ADD NEW CATEGORY------------------------------------------------//
 
 
 //-------------------------------------- START GET ICON LIST------------------------------------------------//
@@ -472,7 +459,66 @@ function getIconList(){
 		});
 
 }
-//-------------------------------------- END GET ICON LIST------------------------------------------------//
+//-------------------------------------- END GET ICON LIST ------------------------------------------------//
+
+//-------------------------------------- START GET DANSAL CATEGORY LIST------------------------------------------------//
+function getDansalCategoryList(){
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "getAllDansalCategoryJSON.json",
+			data:"", 
+			dataType : 'json',
+			timeout : 10000,
+			success : function(data) {
+				if (data.message=="SUCCESS") {
+					addDataForDansalCategoryTable(data.dansalCategoryList);			
+				}
+			},
+			error : function(e) {
+			},
+			done : function(x) {
+				console.log("DONE");
+			}
+		});
+}
+
+//-------------------------------------- END GET DANSAL CATEGORY LIST ------------------------------------------------//
+
+function addDataForDansalCategoryTable(dansalCategoryList){
+		$( "#dansalCategoryTableTBody" ).empty();
+		for (i = 0; i <dansalCategoryList.length; i++) { 	
+		 	var url="${pageContext.request.contextPath}/resources/img/icons/"+dansalCategoryList[i].url+".png";
+			var imageDiv="<img style='width:13%' id="+'"icon'+i+'"'+"src='"+url+"'>";
+			var deleteIcon="<img style='width:15%' "+  "onclick="+'"deleteCategory('+dansalCategoryList[i]+')"'+" src='${pageContext.request.contextPath}/resources/img/common/delete.png'>";
+			var updateIcon="<img style='width:15%' "+  "onclick="+'"updateCategory()"'+" src='${pageContext.request.contextPath}/resources/img/common/update.png'>";
+		 	var row=" <tr> <td> "+(i+1)+" </td> <td>"+imageDiv +"</td>   <td>"+dansalCategoryList[i].type+"</td>  <td>" +deleteIcon+" " +updateIcon+"</td>    </tr>"; 
+	     $("#dansalCategoryTableTBody").append(row);
+
+	}
+}
+
+
+function deleteCategory(id){
+		alert(id);
+}
+
+function updateCategory(){
+	alert("this is update function")
+}
+
+
+
+$(document).ready(function() {
+    $('#dansalCategoryTable').DataTable( {
+       "scrollY":"200px",
+       "scrollCollapse": true,
+       "paging":   false,
+       "ordering": false,
+       "info":     false,
+       "search":false
+    } );
+} );
 </script>
 
 </body>
