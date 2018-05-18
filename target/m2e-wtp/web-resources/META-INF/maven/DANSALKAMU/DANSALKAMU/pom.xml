@@ -4,23 +4,104 @@
   <artifactId>DANSALKAMU</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <name>DANSALKAMUV1.00</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+  	<spring.version>4.2.2.RELEASE</spring.version>
+  	<tiles.version>3.0.5</tiles.version>
+  	<jackson.version>2.6.3</jackson.version>
+	<jstl.version>1.2</jstl.version>
+	<tiles.version>3.0.5</tiles.version>
+	<junit-version>4.11</junit-version>
+    <servlet-api-version>3.1.0</servlet-api-version>
+    <jsp-version>2.1</jsp-version>
+    <jstl-version>1.2</jstl-version>
+    <java.version>1.8</java.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- Spring Dependencies-->
+  <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+	<!-- Spring Dependencies-->
+	
+	<!-- Tiles Dependencies-->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${tiles.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${tiles.version}</version>
+		</dependency> 
+	<!-- Tiles Dependencies-->
+	
+	<!-- Servlet and JSP  Dependencies-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api-version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp-version}</version>
+            <scope>provided</scope>
+        </dependency>
+  	<!-- Servlet and JSP  Dependencies-->
+        <!-- JSTL Dependencies -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl-version}</version>
+        </dependency>
+  		 <!-- JSTL Dependencies -->
+        <!-- JUnit Dependencies-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit Dependencies-->
+  </dependencies>
 </project>

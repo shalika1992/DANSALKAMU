@@ -110,54 +110,9 @@
       </div>
     </div>
   </div>
-  <hr>
-  <div class="w3-container">
-    <h5>General Stats</h5>
-    <p>New Visitors</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
-    </div>
-
-    <p>New Users</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
-    </div>
-
-    <p>Bounce Rate</p>
-    <div class="w3-grey">
-      <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
-    </div>
-  </div>
-  <hr>
-
-
-
-
 
   <br>
-  <div class="w3-container w3-dark-grey w3-padding-32">
-    <div class="w3-row">
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-green">Demographic</h5>
-        <p>Language</p>
-        <p>Country</p>
-        <p>City</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-red">System</h5>
-        <p>Browser</p>
-        <p>OS</p>
-        <p>More</p>
-      </div>
-      <div class="w3-container w3-third">
-        <h5 class="w3-bottombar w3-border-orange">Target</h5>
-        <p>Users</p>
-        <p>Active</p>
-        <p>Geo</p>
-        <p>Interests</p>
-      </div>
-    </div>
-  </div>
+
   
 <!----------------------   START ADD CATEGORY MODEL ---------------------->
 
@@ -274,15 +229,7 @@
 
 <!----------------------   END SELECT ICON MODEL -------------------------> 
 
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <h4>FOOTER</h4>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  </footer>
 
-  <!-- End page content -->
-
-</div>
 
 
 <script>
@@ -453,21 +400,20 @@ function getDansalCategoryList(){
 //-------------------------------------- END GET DANSAL CATEGORY LIST ------------------------------------------------//
 
 function addDataForDansalCategoryTable(dansalCategoryList){
-		$( "#dansalCategoryTableTBody" ).empty();
-		for (i = 0; i <dansalCategoryList.length; i++) { 
-		 	var url="${pageContext.request.contextPath}/resources/img/icons/"+dansalCategoryList[i].url+".png";
-			var imageDiv="<img style='width:13%' id="+'"icon'+i+'"'+"src='"+url+"'>";
-			var deleteIcon="<img style='width:15%' "+  "onclick="+'"showDeleteCategoryModel('+i+')"'+" src='${pageContext.request.contextPath}/resources/img/common/delete.png'>";
-			var updateIcon="<img style='width:15%' "+  "onclick="+'"updateCategory()"'+" src='${pageContext.request.contextPath}/resources/img/common/update.png'>";
-		 	var row=" <tr> <td> "+(i+1)+" </td> <td>"+imageDiv +"</td>   <td>"+dansalCategoryList[i].type+"</td>  <td>" +deleteIcon+" " +updateIcon+"</td>    </tr>"; 
-	     $("#dansalCategoryTableTBody").append(row);
-
+			$( "#dansalCategoryTableTBody" ).empty();
+			for (i = 0; i <dansalCategoryList.length; i++) { 
+			 	var url="${pageContext.request.contextPath}/resources/img/icons/"+dansalCategoryList[i].url+".png";
+				var imageDiv="<img style='width:13%' id="+'"icon'+i+'"'+"src='"+url+"'>";
+				var deleteIcon="<img style='width:15%' "+  "onclick="+'"showDeleteCategoryModel('+i+')"'+" src='${pageContext.request.contextPath}/resources/img/common/delete.png'>";
+				var updateIcon="<img style='width:15%' "+  "onclick="+'"updateCategory()"'+" src='${pageContext.request.contextPath}/resources/img/common/update.png'>";
+			 	var row=" <tr id="+'"row'+i+'"'+"> <td> "+(i+1)+" </td> <td>"+imageDiv +"</td>   <td>"+dansalCategoryList[i].type+"</td>  <td>" +deleteIcon+" " +updateIcon+"</td>    </tr>"; 
+		     $("#dansalCategoryTableTBody").append(row);
 	}
 }
 
 
 function showDeleteCategoryModel(categoryId){
-	$('#msg_deletecategory').empty();
+	$('#msg_deletecategory').empty()
 	$('#dansalCategoryName').empty();
 	$('#dansalCategoryIcon').empty();
 	$('#deleteBtnInCategory').empty();
@@ -482,6 +428,7 @@ function showDeleteCategoryModel(categoryId){
 
 function deleteCategory(categoryId){
 	$('#msg_deletecategory').empty();
+;
 	 $.ajax({
             url: 'deleteDansalCategoryJSON.json',
             data:{'categoryId':categoryList[categoryId].categoryId,'iconId':categoryList[categoryId].iconId},
