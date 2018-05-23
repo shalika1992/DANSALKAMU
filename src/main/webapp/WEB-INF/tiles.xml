@@ -32,7 +32,8 @@
 	</definition>
 	
 	<!-- login page -->
-	<definition name="login" extends="loginTemplate">
+<definition name="login" extends="loginTemplate"> 
+<!-- 	<definition name="login" > -->
 		<put-attribute name="title" value="IBS|Login" />
 		<put-attribute name="body" value="/WEB-INF/pages/login/login.jsp" />
 	</definition>

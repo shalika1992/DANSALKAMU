@@ -147,5 +147,25 @@ public class HomeController {
 		return dansalaCategoryJSONRespons;
 
 	}
+	
+	@RequestMapping(value = "/deleteDansalCategoryJSON", method = RequestMethod.POST)
+		public @ResponseBody Message  deleteDansalCategory(int categoryId,int iconId) {
+			Message message=new Message();
+			
+			try {
+				if(dansalCategoryService.deleteCategory(categoryId, iconId)){
+					message.setSuccessMsg("Succesfully deleted category");
+				}
+				else{
+					message.setErrorMsg("Something is wrong");
+				}
+			}
+	
+			catch (Exception e) {
+				message.setErrorMsg("Something is wrong");
+			}
+			return message;
+	
+		}
 
 }

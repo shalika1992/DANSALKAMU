@@ -38,9 +38,10 @@ public class CheckAccessInterceptor implements HandlerInterceptor{
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
+		boolean isSessionBeanFound = false;
 		try{
 			if(sessionBean != null){
-				isSessionBeanFound = true;
+				/*isSessionBeanFound = true;*/
 			}
 		}catch(Exception e){
 			logger.error("Exception :"+e);
