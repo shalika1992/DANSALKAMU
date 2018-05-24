@@ -1,0 +1,25 @@
+#login_form_main{
+		margin-top:2%;
+		
+}
+
+#login_form{
+	 background-color: LightGray;
+	 
+}
+
+#login{
+	padding:10px;
+}
+
+body{
+	 background-color: hsl(0, 0%, 94%);
+	 background-image:url('../../img/logo/welcomePage.png');
+	}
+	
+.cus_btn{
+	 background-color:black;
+	 color:white;
+	
+}
+
